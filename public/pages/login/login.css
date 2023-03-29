@@ -43,9 +43,10 @@
   .form button {
     font-family: "Montserrat", sans-serif;
     text-transform: uppercase;
+    text-align: center;
     outline: 0;
-    background: #4349a0;
-    width: 100%;
+    background: #4359a0;
+    width: 50%;
     border: 0;
     padding: 15px;
     color: #FFFFFF;

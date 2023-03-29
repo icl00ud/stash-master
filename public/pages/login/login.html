@@ -3,17 +3,23 @@
   <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="../signup/signup.css">
   </head>
   <body>
     <div class="login-page">
       <div class="form">
-        <form class="login-form">
-          <input type="text" placeholder="Usuário" required/>
-          <input type="password" placeholder="Senha" required/>
-          <button>Entrar</button>
-          <p class="message">Não registrado? <a href="#">Crie uma conta</a></p>
+        <form name="loginForm" class="login-form" onsubmit="return validateForm()">
+          <input type="text" name="username" placeholder="Usuário" required/>
+          <input type="password" name="password" placeholder="Senha" required/>
+          <button type="submit">Entrar</button>
+          <p class="message">Não registrado? <a id="openModalBtn" href="#">Crie uma conta</a></p>
         </form>
       </div>
     </div>
+
+    <div id="modal-container"></div>
+
+    <script src="../signup/signup.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>

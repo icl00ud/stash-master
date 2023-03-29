@@ -1,0 +1,98 @@
+/* Modal */
+#myModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  margin: 30vh auto;
+  padding: 20px;
+  border: 1px solid #555;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease-in-out;
+  color: #fff; /* altera a cor do texto para branco */
+}
+
+.modal-content input,
+.modal-content button {
+  color: #fff; /* altera a cor do texto para branco */
+  border: none; /* remove a borda do input e button */
+  background-color: #1a1a1a;
+}
+
+.modal-content .close {
+  color: #fff;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Formulário */
+.register-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff;
+  background-color: #1a1a1a;
+}
+
+.register-form label {
+  display: block;
+  text-align: left;
+  margin: 10px 0;
+  color: rgb(163, 163, 163);
+  font-size: 16px;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 5px 0;
+  display: inline-block;
+  border: none;
+  background: #333333;
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+}
+
+button[type="submit"] {
+  position: relative;
+  background-color: #4359a0;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  left: calc(50% - 60px);
+}
+
+button[type="submit"]:hover {
+  background-color: #182d72;
+}
+
+.close:hover {
+  color: #bbb;
+  transform: scale(1.2);
+}
