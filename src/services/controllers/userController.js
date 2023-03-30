@@ -19,7 +19,6 @@ router.post('/signup', (req, res) => {
             email
         };
         console.log(user);
-        debugger
         _handler.InsertUser(user);
         return res.status(200).json({ message: "Usuário inserido com sucesso!"});
     } catch (err) {
