@@ -9,7 +9,7 @@
     <div class="modal-content">
       <h1 class="no-select">Registrar</h1>
       <span onclick="return closeModal()" class="close">&times;</span>
-      <form name="registerForm" class="register-form" onsubmit="return validateForm()">
+      <form name="registerForm" class="register-form" onsubmit="return validateForm()" method="POST" action="/signup">
         <label for="username"><span class="required">* </span>Usuário:</label>
         <input type="text" id="username" name="username"/>
         <label for="password"><span class="required">* </span>Senha:</label>

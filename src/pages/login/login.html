@@ -9,7 +9,7 @@
     <div id="loginPage" class="login-page">
       <h1 class="software-name no-select">Stash Master</h1>
       <div class="form">
-        <form name="loginForm" class="login-form" onsubmit="return validateForm()">
+        <form name="loginForm" class="login-form" onsubmit="return validateForm()" method="POST" action="/login">
           <input type="text" name="username" placeholder="Usuário" required/>
           <input type="password" name="password" placeholder="Senha" required/>
           <button type="submit">Entrar</button>
