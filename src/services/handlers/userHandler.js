@@ -1,6 +1,4 @@
 const db = require('../database/db');
-const express = require('express');
-const router = express.Router();
 
 async function InsertUser(user) {
     if(!user)

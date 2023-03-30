@@ -3,9 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 // Rota autenticação do usuário
-router.post('/login', (req, res) => {
-    console.log("PDAKPDOSAKPDKOAS")
-    const { username, password } = req.body;
+router.post('/login', (res) => {
 });
 
 // Rota cadastro do usuário
