@@ -3,24 +3,21 @@ const express = require('express');
 const router = express.Router();
 
 async function InsertUser(user) {
-    console.log(user);
-    console.log("CAIU AQUI NO SIGNUP");
-        
-        const sql = 'INSERT INTO TBLUser (user, password, email) VALUES (?, ?, ?)';
+    if(!user)
+        return console.log("Preencha todos os campos!")
 
-         if(!user.username || !user.password || !user.email)
-             return alert("Preencha todos os campos!")
-
-        const connection = await db.Connect();
-        await new Promise((resolve, reject) => {
-            connection.query(sql, [user.username, user.password, user.email], (err, result) => {
-                if (err) 
-                    return reject(err);
-                resolve(result);
-            });
+    const { username, password, email } = user;
+    const sql = 'INSERT INTO TBLUser (user, password, email) VALUES (?, ?, ?)';
+    const connection = await db.Connect();
+    await new Promise((resolve, reject) => {
+        connection.query(sql, [username, password, email], (err, result) => {
+            if (err) 
+                return reject(err);
+            resolve(result);
         });
-        connection.end();
-        console.log("Usuário inserido com sucesso!");
+    });
+    connection.end();
+    console.log("Usuário inserido com sucesso!");
 }
 InsertUser();
 

@@ -9,16 +9,8 @@ router.post('/login', (req, res) => {
 });
 
 // Rota cadastro do usuário
-router.post('/signup', (req, res) => {
+router.post('/signup', (res) => {
     try {
-        
-        const { username, password, email } = req.body;
-        var user = {
-            username,
-            password,
-            email
-        };
-        console.log(user);
         _handler.InsertUser(user);
         return res.status(200).json({ message: "Usuário inserido com sucesso!"});
     } catch (err) {
