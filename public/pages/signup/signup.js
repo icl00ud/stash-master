@@ -1,13 +1,15 @@
-// Abre a modal ao clicar no botão "Criar conta"
 document.getElementById("openModalBtn").addEventListener("click", function() {
   console.log("openModalBtn clicked");
-  
-  // Busca o conteúdo do arquivo modal.html e o insere na div "modal-container"
+
   fetch('../signup/signup.html')
     .then(response => response.text())
     .then(html => {
       document.getElementById('modal-container').innerHTML = html;
-      document.getElementById("myModal").style.display = "block";
+      var modal = document.getElementById("myModal");
+      var loginPage = document.getElementById("loginPage");
+      loginPage.style.opacity = 0.1;
+      modal.classList.add("modal-fadein");
+      modal.style.display = "block";
     })
     .catch(error => console.error(error));
 });
@@ -15,6 +17,7 @@ document.getElementById("openModalBtn").addEventListener("click", function() {
 function closeModal() {
   document.getElementById("myModal").style.display = "none";
   document.getElementById('modal-container').innerHTML = '';
+  document.getElementById("loginPage").style.opacity = 1;
 }
 
 window.addEventListener('click', function(event) {

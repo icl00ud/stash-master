@@ -7,16 +7,17 @@
 
   <div id="myModal" class="modal">
     <div class="modal-content">
+      <h1>Registrar</h1>
       <span onclick="return closeModal()" class="close">&times;</span>
       <form name="registerForm" class="register-form" onsubmit="return validateForm()">
-        <label for="username">Usuário</label>
-        <input type="text" id="username" name="username" placeholder="Digite seu usuário"/>
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" placeholder="Digite sua senha"/>
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="Digite seu e-mail"/>
-        <button type="submit">Criar conta</button>
+        <label for="username"><span class="required">* </span>Usuário:</label>
+        <input type="text" id="username" name="username"/>
+        <label for="password"><span class="required">* </span>Senha:</label>
+        <input type="password" id="password" name="password"/>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email"/>
       </form>
+      <button id="submit-signup" type="submit">Criar conta</button>
     </div>
   </div>
   </body>

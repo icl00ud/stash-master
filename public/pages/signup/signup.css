@@ -6,26 +6,34 @@
   left: 0;
   top: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(143, 143, 143, 0);
 }
 
 .modal-content {
-  background-color: #1a1a1a;
+  display: flex;
   margin: 30vh auto;
   padding: 20px;
-  border: 1px solid #555;
-  width: 80%;
+  border-radius: 10px;
+  box-shadow: 20px 20px 40px #000000;
+  width: 100%;
   max-width: 500px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   transition: 0.3s ease-in-out;
-  color: #fff; /* altera a cor do texto para branco */
+  color: #fff;
+  background: #1f1f1f;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal-content input,
 .modal-content button {
-  color: #fff; /* altera a cor do texto para branco */
-  border: none; /* remove a borda do input e button */
+  color: #fff;
+  border: none;
   background-color: #1a1a1a;
+}
+
+.modal-content input:hover{
+  transition: 0.3s ease-in-out;
+  border-radius: 12px;
 }
 
 .modal-content .close {
@@ -44,12 +52,9 @@
 
 /* Formulário */
 .register-form {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 85%;
   color: #fff;
-  background-color: #1a1a1a;
+  background-color: #1f1f1f;
 }
 
 .register-form label {
@@ -72,12 +77,13 @@
   font-family: 'Roboto', sans-serif;
 }
 
-button[type="submit"] {
+#submit-signup{
   position: relative;
   background-color: #4359a0;
   color: #fff;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 12px;
+  width: 35%;
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
@@ -85,14 +91,34 @@ button[type="submit"] {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  left: calc(50% - 60px);
 }
 
 button[type="submit"]:hover {
-  background-color: #182d72;
+  background-color: #4349a0;
+  transform: scale(1.1);
 }
 
 .close:hover {
   color: #bbb;
   transform: scale(1.2);
+}
+
+.required{
+  color:red;
+  font-size: 15px;
+}
+
+.modal-fadein {
+  animation-name: fadein;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

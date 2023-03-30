@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="../signup/signup.css">
   </head>
   <body>
-    <div class="login-page">
+    <div id="loginPage" class="login-page">
+      <h1 class="software-name">Stash Master</h1>
       <div class="form">
         <form name="loginForm" class="login-form" onsubmit="return validateForm()">
           <input type="text" name="username" placeholder="Usuário" required/>
@@ -17,7 +18,7 @@
       </div>
     </div>
 
-    <div id="modal-container"></div>
+    <div id="modal-container"></div> <!-- Inserção da modal através do signup.js -->
 
     <script src="../signup/signup.js"></script>
     <script src="login.js"></script>
