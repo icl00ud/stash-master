@@ -1,27 +1,26 @@
-document.getElementById("openModalBtn").addEventListener("click", function() {
-  console.log("openModalBtn clicked");
+function sendData() {
+  const form = document.querySelector('#register-form');
 
-  fetch('../signup/signup.html')
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById('modal-container').innerHTML = html;
-      var modal = document.getElementById("myModal");
-      var loginPage = document.getElementById("loginPage");
-      loginPage.style.opacity = 0.1;
-      modal.classList.add("modal-fadein");
-      modal.style.display = "block";
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const formData = {
+      name: document.querySelector('[name="username"]').value,
+      password: document.querySelector('[name="password"]').value,
+      email: document.querySelector('[name="email"]').value
+    };
+
+    fetch('http://localhost:3000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
     })
-    .catch(error => console.error(error));
-});
-
-function closeModal() {
-  document.getElementById("myModal").style.display = "none";
-  document.getElementById('modal-container').innerHTML = '';
-  document.getElementById("loginPage").style.opacity = 1;
+    .then(response => response.json())
+    .then(data => console.log('Data: ', data))
+    .catch(err => console.log('Erro: ', err));
+  });
 }
 
-window.addEventListener('click', function(event) {
-  if (event.target.id === 'myModal') {
-    closeModal();
-  }
-});
+sendData();

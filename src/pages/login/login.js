@@ -15,3 +15,21 @@ function validateForm() {
         return false;
     }
 }
+
+// Função para exibir a página de registro
+function displaySignupPage(url) {
+    const signupLink = document.querySelector('#signup-link');
+    signupLink.addEventListener('click', (event) => {
+        event.preventDefault();
+    });
+
+    fetch(url)
+    .then(response => response.text())
+    .then(html => {
+        document.querySelector("#app").innerHTML = html;
+    })
+    .catch(error => console.log(error));
+
+    history.pushState({}, null, 'http://localhost:3000/signup');
+}
+displaySignupPage();

@@ -2,3 +2,4 @@ appsettings.js
 .vscode
 node_modules
 db.js
+*.log

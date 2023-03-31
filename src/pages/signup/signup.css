@@ -1,124 +1,87 @@
-/* Modal */
-#myModal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  background-color: rgba(143, 143, 143, 0);
+body{
+  background-color: #333;
+  overflow-y: hidden;
 }
 
-.modal-content {
+.container {
   display: flex;
-  margin: 30vh auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 20px 20px 40px #000000;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  padding: 20px 0px;
+  margin: 20% auto;
+  width: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  transform: translate(0, calc(50% - 400px));
+}
+
+.register-form{
   width: 100%;
-  max-width: 500px;
-  transition: 0.3s ease-in-out;
-  color: #fff;
-  background: #1f1f1f;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.modal-content input,
-.modal-content button {
-  color: #fff;
-  border: none;
-  background-color: #1a1a1a;
-}
-
-.modal-content input:hover{
-  transition: 0.3s ease-in-out;
-  border-radius: 12px;
-}
-
-.modal-content .close {
-  color: #fff;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 3rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* Formulário */
-.register-form {
-  width: 85%;
-  color: #fff;
-  background-color: #1f1f1f;
-}
-
-.register-form label {
-  display: block;
-  text-align: left;
-  margin: 10px 0;
-  color: rgb(163, 163, 163);
-  font-size: 16px;
-}
-
-.register-form input {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 5px 0;
-  display: inline-block;
-  border: none;
-  background: #333333;
-  font-size: 16px;
-  transition: 0.3s ease-in-out;
-  font-family: 'Roboto', sans-serif;
-}
-
-#submit-signup{
-  position: relative;
-  background-color: #4359a0;
-  color: #fff;
-  border: none;
-  padding: 12px 12px;
-  width: 35%;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: 0.3s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  font-family: 'Roboto', sans-serif;
+.container > h1 {
+  margin: 15px 0;
+  color: #f5f5f5;
   text-align: center;
+  font-size: 36px;
 }
 
-button[type="submit"]:hover {
-  background-color: #4349a0;
-  transform: scale(1.1);
+label {
+  color: #f5f5f5;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 18px;
+  align-self: flex-start;
+  margin-left: 25px;
 }
 
-.close:hover {
-  color: #bbb;
-  transform: scale(1.2);
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  background-color: #0f0f0f;
+  color: #f5f5f5;
+  border: none;
+  border-radius: 3px;
+  padding: 15px;
+  width: 75%;
+  margin-bottom: 20px;
+  font-size: 14px;
 }
 
-.required{
-  color:red;
-  font-size: 15px;
+input:hover{
+  border-radius: 10px;
+  transition: 1s;
 }
 
-.modal-fadein {
-  animation-name: fadein;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+button {
+  background-color: #1e88e5;
+  color: #f5f5f5;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 3px;
+  font-size: 16px;
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+button:hover {
+  background-color: #1565c0;
+}
+
+form .message {
+  margin-top: 20px;
+  text-align: center;
+  color: #b3b3b3;
+  font-size: 14px;
+}
+
+form .message a {
+  color: #4349a0;
+  text-decoration: none;
 }
