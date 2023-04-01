@@ -12,20 +12,15 @@
     </div>
 
     <div id="loginPage" class="login-page">
-      <h1 class="software-name no-select">Stash Master</h1>
+      <span class="software-logo no-select"><img src="logo.png" /></span>
       <div class="form">
-        <form name="loginForm" class="login-form" action="/login" method="post">
+        <form name="loginForm" class="login-form">
           <input type="text" name="username" placeholder="Usuário" required />
           <input type="password" name="password" placeholder="Senha" required />
-          <button type="submit">Entrar</button>
+          <button id="login-button" type="submit">Entrar</button>
           <p class="message">
             Não registrado?
-            <a
-              id="signup-link"
-              onclick="displaySignupPage('../src/pages/signup/signup.html')"
-              href="/src/pages/signup/signup.html"
-              >Crie uma conta</a
-            >
+            <a id="signup-link" href="#">Crie uma conta</a>
           </p>
         </form>
       </div>

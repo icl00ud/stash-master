@@ -95,15 +95,12 @@ a {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.software-name {
-  font-family: sans-serif;
-  font-size: 42px;
+.software-logo{
   text-align: center;
-  padding: 16px;
-  font-weight: bold;
-  color: #ffffff;
 }
 
 .form {
@@ -120,11 +117,10 @@ a {
 .form input[type="text"],
 .form input[type="password"] {
   font-family: "Montserrat", sans-serif;
-  outline: 0;
   background: #0f0f0f;
   color: #fff;
   width: 100%;
-  border: 0;
+  border: 3px;
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
@@ -133,8 +129,7 @@ a {
 }
 
 .form input:hover {
-  transition: 0.3s ease-in-out;
-  border-radius: 13px;
+  transition: 1s;
 }
 
 .form button {

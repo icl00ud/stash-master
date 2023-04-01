@@ -11,8 +11,8 @@ app.use(express.static(path.join(__dirname, '../../src/pages/signup/signup.css')
 // Rota para lidar com as solicitações relacionadas ao usuário
 app.use('/', userController);
 
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+app.listen(5050, () => {
+  console.log('Servidor rodando na porta 5050');
 });
 
 module.exports = app;
