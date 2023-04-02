@@ -15,7 +15,7 @@ router.post("/login", async (req, res) => {
   if (authenticated) {
     return res.status(200).json({ redirect: "entrei" });
   } else {
-    return res.status(401).json({ redirect: "acesso negado" });
+    return res.status(401).json({ message: "Usuário e/ou senha inválido" });
   }
 });
 
@@ -29,8 +29,7 @@ router.post("/signup", (req, res) => {
     _handler.insertUser(req.body);
     return res.status(200).json({ redirect: "/login?account_created=true" });
   } catch (err) {
-    console.error("Erro: ", err);
-    return res.status(500).json({ redirect: "/signup?account_created=false" });
+    return res.status(500).json({ redirect: "/signup", message: "Erro ao criar a conta" });
   }
 });
 

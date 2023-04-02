@@ -13,8 +13,7 @@ loginButton.addEventListener("click", (event) => {
   };
 
   if (formData.user == "" || formData.password == "") {
-    const messageElement = document;
-    return displayMessage("Preencha todos os campos!", true);
+    return displayModal("Preencha todos os campos!", true);
   } else {
     sendData(formData);
   }
@@ -24,7 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const queryParams = new URLSearchParams(window.location.search);
   const isAccountCreated = queryParams.get("account_created") === "true";
 
-  if (isAccountCreated) displayMessage();
+  if (isAccountCreated) {
+    const newUrl = window.location.href.replace(/[?&]account_created=true($|&)/, '$1');
+    window.history.pushState({}, '', newUrl);
+    displayModal("Conta criada com sucesso!");
+  }
 });
 
 signupButton.addEventListener("click", (event) => {
@@ -41,8 +44,6 @@ async function sendData(data) {
       body: JSON.stringify(data),
     });
 
-    if (!response.ok) throw new Error("Erro ao enviar dados");
-
     const contentType = response.headers.get("content-type");
     let responseData;
 
@@ -52,43 +53,26 @@ async function sendData(data) {
       responseData = await response.text();
     }
 
-    if (responseData.redirect) {
+    if (response.ok) {
       window.location.href = responseData.redirect;
     } else {
-      return;
+      const messageErrorElement = document.getElementById("message-error");
+      const errorMessage = responseData.message;
+      messageErrorElement.innerHTML = errorMessage;
     }
   } catch (err) {
     console.log("Erro: ", err);
   }
 }
 
-function displayMessage(message, isError) {
-  const queryParams = new URLSearchParams(window.location.search);
-  const accountCreated = queryParams.get("account_created");
-
-  if (accountCreated === "true") {
-    const modal = document.getElementById("myModal");
-    const messageElement = document.getElementById("message");
-
-    if (modal && messageElement) {
-      messageElement.innerHTML =
-        accountCreated === "true" ? "Conta criada com sucesso!" : message;
-      displayModal();
-    }
-  } else {
-    const modal = document.getElementById("myModal");
-    const messageElement = document.getElementById("message");
-    messageElement.innerHTML = message;
-    displayModal(isError);
-  }
-}
-
-function displayModal(isError) {
+function displayModal(message, isError = false) {
   const modal = document.getElementById("myModal");
   const modalContent = document.querySelector(".modal-content");
+  const messageElement = document.getElementById("message");
 
   if (isError) modalContent.style.border = "1px solid red";
 
+  messageElement.innerHTML = message;
   // Faço um efeito de fadeIn e fadeOut na modal
   modal.classList.add("show");
   modal.style.display = "block";

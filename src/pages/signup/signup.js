@@ -1,13 +1,6 @@
 const form = document.querySelector(".register-form");
 form.addEventListener("submit", handleSubmit);
 
-document.addEventListener("DOMContentLoaded", () => {
-  const queryParams = new URLSearchParams(window.location.search);
-  const isAccountCreated = queryParams.get("account_created") === "false";
-
-  if (isAccountCreated) displayMessage();
-});
-
 function handleSubmit(event) {
   event.preventDefault();
 
@@ -20,7 +13,8 @@ function handleSubmit(event) {
   };
 
   if (formData.user.length < 3) {
-    messageErrorElement.innerHTML = "O nome de usuário deve ter pelo menos 3 caracteres";
+    messageErrorElement.innerHTML =
+      "O nome de usuário deve ter pelo menos 3 caracteres";
     return;
   }
 
@@ -29,9 +23,14 @@ function handleSubmit(event) {
     return;
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(formData.email)) {
-    messageErrorElement.innerHTML = "O e-mail inserido é inválido";
+  if (formData.email !== "") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      messageErrorElement.innerHTML = "O e-mail inserido é inválido";
+      return;
+    }
+  } else {
+    messageErrorElement.innerHTML = "O campo e-mail é obrigatório!";
     return;
   }
 
@@ -40,15 +39,13 @@ function handleSubmit(event) {
 
 async function sendData(data) {
   try {
-    const response = await fetch('/signup', {
+    const response = await fetch("/signup", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-
-    if (!response.ok) throw new Error("Erro ao enviar dados");
 
     const contentType = response.headers.get("content-type");
     let responseData;
@@ -59,38 +56,34 @@ async function sendData(data) {
       responseData = await response.text();
     }
 
-    if (responseData.redirect) {
+    if (response.ok) {
       window.location.href = responseData.redirect;
+      displayModal(responseData.message);
     } else {
-      console.log("Data: ", responseData);
+      window.location.href = responseData.redirect;
+      displayModal(responseData.message);
     }
   } catch (err) {
     console.log("Erro: ", err);
   }
 }
 
-function displayMessage() {
-  const queryParams = new URLSearchParams(window.location.search);
-  const accountCreated = queryParams.get("account_created");
+function displayModal(message) {
+  const modal = document.getElementById("myModal");
+  const messageElement = document.getElementById("message");
 
-  if (accountCreated === "false") {
-    const modal = document.getElementById("myModal");
-    const messageElement = document.getElementById("message");
+  if (modal && messageElement) {
+    messageElement.innerHTML = message;
 
-    if (modal && messageElement) {
-      messageElement.innerHTML =
-        accountCreated === "false" ? "Falha ao criar a conta" : message;
-
-      // Faço um efeito de fadeIn e fadeOut na modal
-      modal.classList.add("show");
-      modal.style.display = "block";
+    // Faço um efeito de fadeIn e fadeOut na modal
+    modal.classList.add("show");
+    modal.style.display = "block";
+    setTimeout(() => {
+      modal.classList.remove("show");
+      modal.classList.add("hide");
       setTimeout(() => {
-        modal.classList.remove("show");
-        modal.classList.add("hide");
-        setTimeout(() => {
-          modal.style.display = "none";
-        }, 1000);
-      }, 3000);
-    }
+        modal.style.display = "none";
+      }, 1000);
+    }, 3000);
   }
 }

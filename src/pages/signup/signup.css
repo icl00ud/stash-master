@@ -155,7 +155,7 @@ form .message a {
 }
 
 .message-error {
-  margin-top: 15px;
+  margin-top: 5px;
   color: red;
-  font-weight: bold;
+  padding-top: 25px;
 }

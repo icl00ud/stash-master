@@ -17,24 +17,23 @@ async function insertUser(account) {
 }
 
 async function authenticateUser(userObject) {
+  let connection = await db.Connect();
   try {
     const { user, password } = userObject;
-    console.log("CAÍ NO TRY username e password", user, password);
-    console.log("CAÍ NO TRY user", userObject);
     const sql = "SELECT user, password FROM TBLUser WHERE user = ? AND password = ?";
-    const connection = await db.Connect();
-    await new Promise((resolve, reject) => {
-      connection.query(sql, [user, password], (err, result) => {
-        if (err) return reject(err);
-        resolve(result);
-      });
-    });
-    connection.end();
-  } catch {
-    const { username, password } = userObject;
-    console.log("CAÍ NO CATCH username e password", username, password);
-    console.log("CAÍ NO CATCH user", userObject);
+    const [rows, fields] = await connection.execute(sql, [user, password]);
+
+    if (rows.length > 0) {
+      const { user: username, password: passwordHash } = rows[0];
+      if (username === user && passwordHash === password)
+        return true
+    } else {
+      return false
+    }
+  } catch (err) {
     throw new Error("Preencha os campos!");
+  } finally {
+    if (connection !== null) connection.end();
   }
 }
 

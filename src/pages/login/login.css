@@ -12,7 +12,7 @@ body {
 .modal {
   display: none;
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
@@ -167,4 +167,10 @@ a {
 
 .no-select {
   user-select: none;
+}
+
+.message-error {
+  margin-top: 5px;
+  color: red;
+  padding-top: 25px;
 }
