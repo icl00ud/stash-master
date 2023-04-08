@@ -49,7 +49,11 @@ async function sendData() {
     body: JSON.stringify(data),
   });
 
-  if (response.ok) displayModalMessage("Produto alterado com sucesso!");
+  if (response.ok) {
+    closeModalProduct();
+    displayModalMessage("Produto alterado com sucesso!");
+    emitEvent("reloadGrid");
+  }
 }
 
 // Preencho os campos de acordo com o id do produto
@@ -96,6 +100,7 @@ function closeModalProduct() {
   }
 }
 
+// Mostro uma modal de mensagem
 function displayModalMessage(message) {
   const modal = document.getElementById("modal-error");
   const messageElement = document.getElementById("message-modal");
@@ -114,4 +119,13 @@ function displayModalMessage(message) {
       }, 1000);
     }, 3000);
   }
+}
+
+function emitEvent(eventName, detail = null) {
+  const customEvent = new CustomEvent(eventName, {
+    bubbles: true,
+    detail: detail,
+  });
+
+  document.dispatchEvent(customEvent);
 }

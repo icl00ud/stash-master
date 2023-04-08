@@ -16,6 +16,10 @@ window.addEventListener("load", async () => {
   await populateGrid();
 });
 
+document.addEventListener("reloadGrid", async () => {
+  await populateGrid();
+});
+
 function loadModal(button) {
   switch (button) {
     case "create-product":
@@ -61,22 +65,34 @@ function loadModal(button) {
 }
 
 async function populateGrid() {
-  var grid = document.getElementById("table-items");
-  await fetch("/product")
-    .then((response) => response.json())
-    .then((products) => {
-      products[0].forEach((product) => {
-        grid.innerHTML += `
-        <tr>
-          <td>${product.idProduct}</td>
-          <td>${product.nome}</td>
-          <td>${product.qtdEstoque}</td>
-          <td>${product.unidMedida}</td>
-          <td>${product.preco}</td>
-          <td>${product.fornecedor}</td>
-          <td>${product.dtCreation}</td>
-        </tr>
-        `;
-      });
-    });
+  const grid = document.getElementById("table-items");
+  grid.innerHTML = "";
+
+  const response = await fetch("/product");
+  const products = await response.json();
+
+  for (const product of products[0]) {
+    const row = grid.insertRow();
+
+    const idCell = row.insertCell();
+    idCell.textContent = product.idProduct;
+
+    const nameCell = row.insertCell();
+    nameCell.textContent = product.nome;
+
+    const stockCell = row.insertCell();
+    stockCell.textContent = product.qtdEstoque;
+
+    const unitCell = row.insertCell();
+    unitCell.textContent = product.unidMedida;
+
+    const priceCell = row.insertCell();
+    priceCell.textContent = product.preco;
+
+    const supplierCell = row.insertCell();
+    supplierCell.textContent = product.fornecedor;
+
+    const creationDateCell = row.insertCell();
+    creationDateCell.textContent = product.dtCreation;
+  }
 }

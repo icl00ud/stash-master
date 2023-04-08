@@ -1,12 +1,18 @@
 var cancelButton = document.getElementById("cancel");
 var saveButton = document.getElementById("save");
 
+// Event listener
+
 cancelButton.addEventListener("click", (event) => {
   closeModalProduct();
 });
+
 saveButton.addEventListener("click", async (event) => {
   sendData();
 });
+
+
+// Functions
 
 function closeModalProduct() {
   var modal = document.getElementById("createProductModal");
@@ -40,8 +46,22 @@ async function sendData() {
     body: JSON.stringify(data),
   });
 
-  if(response.ok)
-    displayModal("Produto criada com sucesso")
+  if (response.ok) {
+    displayModal("Produto criado com sucesso");
+    emitEvent("reloadGrid");
+    closeModalProduct();
+  } else {
+    displayModal("Erro ao criar o produto");
+  }
+}
+
+function emitEvent(eventName, detail = null) {
+  const customEvent = new CustomEvent(eventName, {
+    bubbles: true,
+    detail: detail,
+  });
+
+  document.dispatchEvent(customEvent);
 }
 
 function displayModal(message) {
