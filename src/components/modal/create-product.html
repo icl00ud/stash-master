@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar Produto</title>
+    <link rel="stylesheet" href="create-product.css" />
+  </head>
+  <body>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-title">Adicionar Produto</div>
+        <form class="form-group">
+          <div class="input-wrapper">
+            <input type="text" class="modal-input" name="name" autocomplete="off" required />
+            <label for="name">Nome do produto</label>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="modal-input" name="quantity" required />
+            <label for="quantity">Quantidade</label>
+          </div>
+          <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+            <select style="width: 80%;" class="modal-input" name="select" required>
+              <option value="">Selecione a unidade de medida</option>
+              <option value="Kg">Kilograma</option>
+              <option value="g">grama</option>
+              <option value="Un">Unidade</option>
+              <option value="L">Litro</option>
+              <option value="Caixa">Caixa</option>
+            </select>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="modal-input" name="preco" required />
+            <label for="preco">Preço (R$)</label>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="modal-input" name="provider" required />
+            <label for="provider">Fornecedor</label>
+          </div>      
+        </form>
+        <div class="modal-buttons">
+          <button id="cancel">Cancelar</button>
+          <button id="save">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

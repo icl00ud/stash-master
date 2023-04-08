@@ -11,9 +11,9 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const authenticated = await _handler.authenticateUser(req.body);
+  const authenticated = await _handler.authenticateUser(req);
   if (authenticated) {
-    return res.status(200).json({ redirect: "entrei" });
+    return res.status(200).json({ redirect: "stock" });
   } else {
     return res.status(401).json({ message: "Usuário e/ou senha inválido" });
   }

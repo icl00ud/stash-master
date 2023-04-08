@@ -6,7 +6,7 @@
 
 body {
   background-color: #333333;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .modal {
@@ -26,7 +26,6 @@ body {
   margin: 2.5% auto;
   padding: 15px;
   border: 1px solid #00ff2a70;
-  border-radius: 25px;
   width: max-content;
   position: relative;
   text-align: center;
