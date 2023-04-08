@@ -1,21 +1,22 @@
 var cancelButton = document.getElementById("cancel-update");
 var saveButton = document.getElementById("save-update");
 var errorElement = document.getElementById("message-error");
-// Fecho a modal
-cancelButton.addEventListener("click", (event) => {
-  var modal = document.getElementById("updateProductModal");
-  modal.innerHTML = "";
 
-  var scripts = document.getElementsByTagName("script");
-  for (var i = 0; i < scripts.length; i++) {
-    if (scripts[i].getAttribute("src") !== "stock.js") {
-      scripts[i].parentNode.removeChild(scripts[i]);
-    }
-  }
+cancelButton.addEventListener("click", (event) => {
+  closeModalProduct();
+});
+
+var idInput = document.getElementById("idProduct");
+idInput.addEventListener("change", async (event) => {
+  fillProductFields();
+});
+
+saveButton.addEventListener("click", async (event) => {
+  sendData();
 });
 
 // Envio os dados alterados para o backend
-saveButton.addEventListener("click", async (event) => {
+async function sendData() {
   var form = new FormData(document.querySelector(".form-group"));
   var data = {
     idProduct: form.get("idProduct"),
@@ -26,8 +27,8 @@ saveButton.addEventListener("click", async (event) => {
     provider: form.get("provider"),
   };
 
-  if(data.idProduct == '')
-    return errorElement.innerHTML = 'Preencha com um código'
+  if (data.idProduct == "")
+    return (errorElement.innerHTML = "Preencha com um código");
 
   var hasData = false;
   for (var key in data) {
@@ -37,8 +38,7 @@ saveButton.addEventListener("click", async (event) => {
     }
   }
 
-  if (!hasData)
-    return displayModal("Preencha pelo menos um campo");
+  if (!hasData) return displayModalMessage("Preencha pelo menos um campo");
 
   console.log(data);
   var response = await fetch("/product", {
@@ -49,12 +49,11 @@ saveButton.addEventListener("click", async (event) => {
     body: JSON.stringify(data),
   });
 
-  if (response.ok) displayModal("Produto alterado com sucesso!");
-});
+  if (response.ok) displayModalMessage("Produto alterado com sucesso!");
+}
 
 // Preencho os campos de acordo com o id do produto
-var idInput = document.getElementById("idProduct");
-idInput.addEventListener("change", async (event) => {
+async function fillProductFields() {
   var id = idInput.value.trim();
   if (id !== "") {
     var response = await fetch(`/product/${id}`);
@@ -82,9 +81,22 @@ idInput.addEventListener("change", async (event) => {
       }
     }
   }
-});
+}
 
-function displayModal(message) {
+// Fecho a modal de alterar produto
+function closeModalProduct() {
+  var modal = document.getElementById("updateProductModal");
+  modal.innerHTML = "";
+
+  var scripts = document.getElementsByTagName("script");
+  for (var i = 0; i < scripts.length; i++) {
+    if (scripts[i].getAttribute("src") !== "stock.js") {
+      scripts[i].parentNode.removeChild(scripts[i]);
+    }
+  }
+}
+
+function displayModalMessage(message) {
   const modal = document.getElementById("modal-error");
   const messageElement = document.getElementById("message-modal");
 
