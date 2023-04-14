@@ -19,7 +19,7 @@
 
 .modal-content {
   background-color: #fff;
-  margin: calc(6% + 40px) auto;
+  margin: calc(4% + 40px) auto;
   border: 1px solid #888;
   max-width: 450px;
 }

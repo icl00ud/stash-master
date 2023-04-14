@@ -47,9 +47,9 @@ async function sendData() {
   });
 
   if (response.ok) {
+    closeModalProduct();
     displayModal("Produto criado com sucesso");
     emitEvent("reloadGrid");
-    closeModalProduct();
   } else {
     displayModal("Erro ao criar o produto");
   }
