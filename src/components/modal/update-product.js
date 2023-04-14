@@ -18,12 +18,14 @@ saveButton.addEventListener("click", async (event) => {
 // Envio os dados alterados para o backend
 async function sendData() {
   var form = new FormData(document.querySelector(".form-group"));
+  var price = form.get("preco").replace(",", ".");
+  var quantity = form.get("quantity").replace(",", ".");
   var data = {
     idProduct: form.get("idProduct"),
     name: form.get("name"),
-    quantity: form.get("quantity"),
+    quantity: quantity,
     unit: form.get("select"),
-    price: form.get("preco"),
+    price: price,
     provider: form.get("provider"),
   };
 

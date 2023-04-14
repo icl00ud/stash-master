@@ -2,12 +2,15 @@ var createProductModal = document.getElementById("createProductModal");
 var updateProductModal = document.getElementById("updateProductModal");
 var deleteProductModal = document.getElementById("deleteProductModal");
 
+var updateProductButton = document.getElementById("update-product");
 var createProductButton = document.getElementById("create-product");
+
+// Event listeners
+
 createProductButton.addEventListener("click", (event) => {
   loadModal("create-product");
 });
 
-var updateProductButton = document.getElementById("update-product");
 updateProductButton.addEventListener("click", (event) => {
   loadModal("update-product");
 });
@@ -20,48 +23,38 @@ document.addEventListener("reloadGrid", async () => {
   await populateGrid();
 });
 
+// Functions
+
 function loadModal(button) {
+  var url, modal, scriptSrc;
   switch (button) {
     case "create-product":
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "/stock/create_product", true);
-      xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-          createProductModal.innerHTML = this.responseText;
-          var script = document.createElement("script");
-          script.src = "create-product.js";
-          document.body.appendChild(script);
-        }
-      };
-      xhr.send();
+      url = "/stock/create_product";
+      modal = createProductModal;
+      scriptSrc = "create-product.js";
       break;
     case "update-product":
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "/stock/update_product", true);
-      xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-          updateProductModal.innerHTML = this.responseText;
-          var script = document.createElement("script");
-          script.src = "update-product.js";
-          document.body.appendChild(script);
-        }
-      };
-      xhr.send();
+      url = "/stock/update_product";
+      modal = updateProductModal;
+      scriptSrc = "update-product.js";
       break;
     case "delete-product":
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "/stock/delete_product", true);
-      xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-          deleteProductModal.innerHTML = this.responseText;
-          var script = document.createElement("script");
-          script.src = "delete-product.js";
-          document.body.appendChild(script);
-        }
-      };
-      xhr.send();
+      url = "/stock/delete_product";
+      modal = deleteProductModal;
+      scriptSrc = "delete-product.js";
       break;
   }
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.onreadystatechange = function () {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+      modal.innerHTML = this.responseText;
+      var script = document.createElement("script");
+      script.src = scriptSrc;
+      document.body.appendChild(script);
+    }
+  };
+  xhr.send();
 }
 
 async function populateGrid() {
