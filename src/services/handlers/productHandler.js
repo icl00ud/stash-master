@@ -55,10 +55,8 @@ async function insertProduct(product) {
   }
 }
 
-
 async function updateProduct(product) {
-  if (!product)
-    throw new Error("Product object is required.");
+  if (!product) throw new Error("Product object is required.");
 
   let connection;
 
@@ -66,19 +64,28 @@ async function updateProduct(product) {
     connection = await db.Connect();
 
     // obter o produto atual do banco de dados
-    const [rows] = await connection.query("SELECT * FROM TBLProduct WHERE idProduct = ?", [product.idProduct]);
+    const [rows] = await connection.query(
+      "SELECT * FROM TBLProduct WHERE idProduct = ?",
+      [product.idProduct]
+    );
     const currentProduct = rows[0];
 
-    if(!currentProduct)
-      throw new Error('Produto inexistente')
+    if (!currentProduct) throw new Error("Produto inexistente");
 
     // criar um objeto com as propriedades do produto que foram atualizadas
     const updatedFields = {
       nome: product.name !== currentProduct.nome ? product.name : undefined,
-      qtdEstoque: product.quantity !== currentProduct.qtdEstoque? product.quantity: undefined,
-      unidMedida: product.unit !== currentProduct.unidMedida ? product.unit : undefined,
+      qtdEstoque:
+        product.quantity !== currentProduct.qtdEstoque
+          ? product.quantity
+          : undefined,
+      unidMedida:
+        product.unit !== currentProduct.unidMedida ? product.unit : undefined,
       preco: product.price !== currentProduct.preco ? product.price : undefined,
-      fornecedor: product.provider !== currentProduct.fornecedor? product.provider: undefined,
+      fornecedor:
+        product.provider !== currentProduct.fornecedor
+          ? product.provider
+          : undefined,
     };
 
     // montar a cláusula SET e o array de valores para a atualização
@@ -92,12 +99,28 @@ async function updateProduct(product) {
 
     const sqlQuery = `UPDATE TBLProduct SET ${setClause} WHERE idProduct = ?`;
     await connection.query(sqlQuery, [...values, product.idProduct]);
-  } catch (err) {
-    return console.error(`Failed to update product: ${err.message}`);
+  } catch (error) {
+    return console.error(`Failed to update product: ${error.message}`);
   } finally {
     if (connection) {
       connection.end();
     }
+  }
+}
+
+async function deleteProduct(id) {
+  if (!id) throw new Error("'id' is null");
+
+  let connection;
+
+  try {
+    connection = await db.Connect();
+    var sqlQuery = "DELETE FROM TBLProduct WHERE idProduct = ?";
+    await connection.query(sqlQuery, id);
+  } catch (error) {
+    return console.error(`Failed to delete product: ${error.message}`);
+  } finally {
+    if (connection) connection.end();
   }
 }
 
@@ -106,4 +129,5 @@ module.exports = {
   updateProduct,
   getAllProducts,
   getProductById,
+  deleteProduct,
 };

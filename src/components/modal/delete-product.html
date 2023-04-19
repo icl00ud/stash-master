@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deletar Produto</title>
+    <link rel="stylesheet" href="delete-product.css" />
+  </head>
+  <body>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-title">Deletar Produto</div>
+        <form class="form-group">
+          <div class="input-wrapper">
+            <input type="text" class="modal-input" id="idProduct" name="idProduct" />
+            <label for="idProduct">Código do Produto</label>
+            <span id="message-error"></span>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="modal-input" name="name" id="name"  />
+            <label for="name">Nome do produto</label>
+          </div>
+          <div class="modal-buttons">
+            <button id="cancel-update">Cancelar</button>
+            <button id="delete-update">Deletar</button>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

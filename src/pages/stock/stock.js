@@ -4,6 +4,7 @@ var deleteProductModal = document.getElementById("deleteProductModal");
 
 var updateProductButton = document.getElementById("update-product");
 var createProductButton = document.getElementById("create-product");
+var deleteProductButton = document.getElementById("delete-product");
 
 // Event listeners
 
@@ -13,6 +14,10 @@ createProductButton.addEventListener("click", (event) => {
 
 updateProductButton.addEventListener("click", (event) => {
   loadModal("update-product");
+});
+
+deleteProductButton.addEventListener("click", (event) => {
+  loadModal("delete-product");
 });
 
 window.addEventListener("load", async () => {

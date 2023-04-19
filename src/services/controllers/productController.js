@@ -13,6 +13,7 @@ router.get("/product", async (req, res) => {
 
 router.get("/product/:id", async (req, res) => {
   try {
+    console.log('caí aqui')
     const product = await _handler.getProductById(req.params.id);
     return res.status(200).json(product);
   } catch (err) {
@@ -23,9 +24,7 @@ router.get("/product/:id", async (req, res) => {
 router.post("/product", (req, res) => {
   try {
     _handler.insertProduct(req.body);
-    return res
-      .status(200)
-      .json({ redirect: "/stock", message: "Produto criado com sucesso!" });
+    return res.status(200).json({ redirect: "/stock", message: "Produto criado com sucesso!" });
   } catch (err) {
     return res.status(500).json({ message: "Erro ao criar o produto" });
   }
@@ -40,16 +39,12 @@ router.patch("/product", async (req, res) => {
   }
 });
 
-router.delete("/product", (req, res) => {
+router.delete("/product/:id", (req, res) => {
   try {
-    _handler.deleteProduct(req.body);
-    return res
-      .status(200)
-      .json({ redirect: "/stock", message: "Produto excluído com sucesso" });
+    _handler.deleteProduct(req.params.id);
+    return res.status(200).json({ redirect: "/stock", message: "Produto excluído com sucesso" });
   } catch (err) {
-    return res
-      .status(500)
-      .json({ redirect: "/stock", message: "Erro ao deletar o produto" });
+    return res.status(500).json({ redirect: "/stock", message: "Erro ao deletar o produto" });
   }
 });
 

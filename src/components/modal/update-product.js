@@ -42,7 +42,6 @@ async function sendData() {
 
   if (!hasData) return displayModalMessage("Preencha pelo menos um campo");
 
-  console.log(data);
   var response = await fetch("/product", {
     method: "PATCH",
     headers: {
