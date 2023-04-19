@@ -5,6 +5,8 @@ var deleteProductModal = document.getElementById("deleteProductModal");
 var updateProductButton = document.getElementById("update-product");
 var createProductButton = document.getElementById("create-product");
 var deleteProductButton = document.getElementById("delete-product");
+var stockHeaderButton = document.getElementById("stock");
+var panelHeaderButton = document.getElementById("panel");
 
 // Event listeners
 
@@ -26,6 +28,24 @@ window.addEventListener("load", async () => {
 
 document.addEventListener("reloadGrid", async () => {
   await populateGrid();
+});
+
+stockHeaderButton.addEventListener("click", (event) => {
+  var urlAtual = window.location.href;
+  if (urlAtual.includes("/stock")) {
+    return;
+  } else {
+    window.location.href = "/stock";
+  }
+});
+
+panelHeaderButton.addEventListener("click", (event) => {
+  var urlAtual = window.location.href;
+  if (urlAtual.includes("/panel")) {
+    return;
+  } else {
+    window.location.href = "/panel";
+  }
 });
 
 // Functions
