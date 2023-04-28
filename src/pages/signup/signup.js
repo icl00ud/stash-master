@@ -13,8 +13,7 @@ function handleSubmit(event) {
   };
 
   if (formData.user.length < 3) {
-    messageErrorElement.innerHTML =
-      "O nome de usuário deve ter pelo menos 3 caracteres";
+    messageErrorElement.innerHTML = "O nome de usuário deve ter pelo menos 3 caracteres";
     return;
   }
 
@@ -41,30 +40,17 @@ async function sendData(data) {
   try {
     const response = await fetch("/signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
 
-    const contentType = response.headers.get("content-type");
-    let responseData;
-
-    if (contentType && contentType.indexOf("application/json") !== -1) {
-      responseData = await response.json();
-    } else {
-      responseData = await response.text();
-    }
-
-    if (response.ok) {
-      window.location.href = responseData.redirect;
-      displayModal(responseData.message);
-    } else {
-      window.location.href = responseData.redirect;
-      displayModal(responseData.message);
-    }
+    const contentType = response.headers?.get("content-type");
+    const responseData =
+      contentType?.indexOf("application/json") !== -1 ? await response.json() : await response.text();
+    window.location.href = responseData.redirect;
+    displayModal(responseData.message);
   } catch (err) {
-    console.log("Erro: ", err);
+    console.log(`Erro: ${err}`);
   }
 }
 
