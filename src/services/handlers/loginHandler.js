@@ -2,6 +2,7 @@ const db = require("../database/db");
 
 async function authenticateUser(req) {
   let connection = await db.Connect();
+  
   try {
     const { user, password } = req;
     const sql = "SELECT user, password FROM TBLUser WHERE user = ? AND password = ?";
@@ -9,12 +10,14 @@ async function authenticateUser(req) {
 
     if (rows.length > 0) {
       const { user: username, password: passwordHash } = rows[0];
-      if (username === user && passwordHash === password) return true;
+      if (username === user && passwordHash === password) 
+        return true;
     } else {
       return false;
     }
   } catch (err) {
-    throw new Error("Preencha os campos!");
+    new Error("Preencha os campos!");
+    return false;
   } finally {
     if (connection !== null) connection.end();
   }
