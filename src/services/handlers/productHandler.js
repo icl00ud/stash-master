@@ -26,7 +26,8 @@ async function getProductById(productId) {
     console.error(err);
     throw err;
   } finally {
-    connection.end();
+    if(connection !== null)
+      connection.end();
   }
 }
 
