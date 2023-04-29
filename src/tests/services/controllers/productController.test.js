@@ -57,6 +57,4 @@ describe("Product Route Tests", () => {
     expect(spy).toHaveBeenCalledWith("1");
     spy.mockRestore();
   });
-
-  // Add more tests as necessary
 });
