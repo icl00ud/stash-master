@@ -11,7 +11,8 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const authenticated = await _handler.authenticateUser(req);
+  const authenticated = await _handler.authenticateUser(req.body);
+  console.log(authenticated)
   if (authenticated) {
     return res.status(200).json({ redirect: "stock" });
   } else {

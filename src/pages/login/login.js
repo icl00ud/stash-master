@@ -84,3 +84,8 @@ function displayModal(message, isError = false) {
     }, 1000);
   }, 3000);
 }
+
+module.exports = {
+  sendData,
+  displayModal
+}

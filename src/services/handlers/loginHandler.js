@@ -3,7 +3,7 @@ const db = require("../database/db");
 async function authenticateUser(req) {
   let connection = await db.Connect();
   try {
-    const { user, password } = req.body;
+    const { user, password } = req;
     const sql = "SELECT user, password FROM TBLUser WHERE user = ? AND password = ?";
     const [rows, fields] = await connection.execute(sql, [user, password]);
 
