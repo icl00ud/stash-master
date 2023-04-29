@@ -12,7 +12,7 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async (req, res) => {
   var response = await _handler.insertUser(req.body);
-  console.log(response)
+
   if(response) {
     return res.status(200).json({ redirect: "/login?account_created=true" });
   } else {

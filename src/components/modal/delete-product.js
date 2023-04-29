@@ -31,7 +31,7 @@ async function fillInputField() {
   if (id !== "") {
     var response = await fetch(`/product/${id}`);
     var data = await response.json();
-    console.log(data);
+
     if (response.ok) {
       var nameInput = document.getElementById("name");
       if (data.length > 0) {

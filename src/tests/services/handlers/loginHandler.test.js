@@ -7,8 +7,6 @@ describe('authenticateUser', () => {
       .post('/login')
       .send({ user: 'admin', password: 'adminadmin' });
 
-    console.log(response)
-
     expect(response.statusCode).toBe(200);
   });
 

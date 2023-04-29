@@ -1,7 +1,6 @@
 const db = require("../database/db");
 
 async function insertUser(account) {
-  console.log(account)
   if (account.user === "" || account.password === "" || account.email === "")
     return false;
 

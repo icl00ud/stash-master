@@ -13,7 +13,6 @@ router.get("/product", async (req, res) => {
 
 router.get("/product/:id", async (req, res) => {
   try {
-    console.log('caí aqui')
     const product = await _handler.getProductById(req.params.id);
     return res.status(200).json(product);
   } catch (err) {
