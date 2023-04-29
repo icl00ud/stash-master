@@ -21,13 +21,19 @@ async function getProductById(productId) {
 
   try {
     const result = await connection.query(sqlQuery, [productId]);
+
+    if (result[0].length === 0) {
+      const error = new Error("Produto não encontrado");
+      error.statusCode = 404;
+      throw error;
+    }
+
     return result[0];
   } catch (err) {
     console.error(err);
     throw err;
   } finally {
-    if(connection !== null)
-      connection.end();
+    if (connection !== null) connection.end();
   }
 }
 
@@ -76,17 +82,10 @@ async function updateProduct(product) {
     // criar um objeto com as propriedades do produto que foram atualizadas
     const updatedFields = {
       nome: product.name !== currentProduct.nome ? product.name : undefined,
-      qtdEstoque:
-        product.quantity !== currentProduct.qtdEstoque
-          ? product.quantity
-          : undefined,
-      unidMedida:
-        product.unit !== currentProduct.unidMedida ? product.unit : undefined,
+      qtdEstoque:product.quantity !== currentProduct.qtdEstoque ? product.quantity : undefined,
+      unidMedida: product.unit !== currentProduct.unidMedida ? product.unit : undefined,
       preco: product.price !== currentProduct.preco ? product.price : undefined,
-      fornecedor:
-        product.provider !== currentProduct.fornecedor
-          ? product.provider
-          : undefined,
+      fornecedor: product.provider !== currentProduct.fornecedor ? product.provider : undefined,
     };
 
     // montar a cláusula SET e o array de valores para a atualização
@@ -116,14 +115,23 @@ async function deleteProduct(id) {
 
   try {
     connection = await db.Connect();
+    var sqlQueryCheck = "SELECT COUNT(*) AS count FROM TBLProduct WHERE idProduct = ?";
+    const [rows] = await connection.query(sqlQueryCheck, id);
+
+    const count = rows[0].count;
+    if (count === 0) throw new Error(`Product with id ${id} does not exist`);
+    
     var sqlQuery = "DELETE FROM TBLProduct WHERE idProduct = ?";
     await connection.query(sqlQuery, id);
+    return true;
   } catch (error) {
-    return console.error(`Failed to delete product: ${error.message}`);
+    console.error(`Failed to delete product: ${error.message}`);
+    return false;
   } finally {
     if (connection) connection.end();
   }
 }
+
 
 module.exports = {
   insertProduct,

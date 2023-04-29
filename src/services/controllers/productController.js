@@ -16,14 +16,14 @@ router.get("/product/:id", async (req, res) => {
     const product = await _handler.getProductById(req.params.id);
     return res.status(200).json(product);
   } catch (err) {
-    return res.status(500).json({ message: "O produto não existe" });
+    return res.status(404).json({ message: "Produto não encontrado!" });
   }
 });
 
 router.post("/product", (req, res) => {
   try {
     _handler.insertProduct(req.body);
-    return res.status(200).json({ redirect: "/stock", message: "Produto criado com sucesso!" });
+    return res.status(201).json({ redirect: "/stock", message: "Produto criado com sucesso!" });
   } catch (err) {
     return res.status(500).json({ message: "Erro ao criar o produto" });
   }
@@ -43,7 +43,7 @@ router.delete("/product/:id", (req, res) => {
     _handler.deleteProduct(req.params.id);
     return res.status(200).json({ redirect: "/stock", message: "Produto excluído com sucesso" });
   } catch (err) {
-    return res.status(500).json({ redirect: "/stock", message: "Erro ao deletar o produto" });
+    return res.status(404).json({ redirect: "/stock", message: "Erro ao deletar o produto" });
   }
 });
 
