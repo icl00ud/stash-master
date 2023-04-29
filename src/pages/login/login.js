@@ -37,7 +37,7 @@ signupButton.addEventListener("click", (event) => {
   window.location.href = "/signup";
 });
 
-export async function sendData({ user, password }) {
+async function sendData({ user, password }) {
   try {
     const response = await fetch("/login", {
       method: "POST",
@@ -61,7 +61,7 @@ export async function sendData({ user, password }) {
   }
 }
 
-export function displayModal(message, isError = false) {
+function displayModal(message, isError = false) {
   modalContent.style.border = isError ? "1px solid red" : "";
   messageElement.innerHTML = message;
 
@@ -74,9 +74,4 @@ export function displayModal(message, isError = false) {
       modal.style.display = "none";
     }, 1000);
   }, 3000);
-}
-
-module.exports = {
-  sendData,
-  displayModal
 }
