@@ -6,7 +6,6 @@ describe("Login routes", () => {
     const response = await request(app).get("/login");
     expect(response.statusCode).toBe(200);
     expect(response.header["content-type"]).toContain("text/html");
-    // add more tests here to check specific content of the HTML page
   });
 
   test("POST /login with correct credentials returns status code 200 and redirect to /stock", async () => {
