@@ -11,6 +11,7 @@ app.use("/", require("../controllers/signupController"));
 app.use("/", require("../controllers/stockController"));
 app.use("/", require("../controllers/modalController"));
 app.use("/", require("../controllers/productController"));
+app.use("/", require("../controllers/providerController"));
 
 
 app.listen(5050, () => {

@@ -71,10 +71,7 @@ async function updateProduct(product) {
     connection = await db.Connect();
 
     // obter o produto atual do banco de dados
-    const [rows] = await connection.query(
-      "SELECT * FROM TBLProduct WHERE idProduct = ?",
-      [product.idProduct]
-    );
+    const [rows] = await connection.query("SELECT * FROM TBLProduct WHERE idProduct = ?",[product.idProduct]);
     const currentProduct = rows[0];
 
     if (!currentProduct) throw new Error("Produto inexistente");
