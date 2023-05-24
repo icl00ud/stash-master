@@ -33,7 +33,7 @@ header {
   height: 50px;
 }
 
-#stock-content, #movement-content{
+.inner-box{
   bottom: 0;
   position: absolute;
   width: 85%;
@@ -123,8 +123,7 @@ span {
 
 .tabs {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .tab {

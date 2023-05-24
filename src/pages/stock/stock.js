@@ -7,29 +7,47 @@ var deleteProductButton = document.getElementById("delete-product");
 var stockHeaderButton = document.getElementById("stock");
 var panelHeaderButton = document.getElementById("panel");
 var stockTab = document.getElementById("stock-tab");
-var panelTab = document.getElementById("movement-tab");
+var movementTab = document.getElementById("movement-tab");
+var categoryTab = document.getElementById("category-tab");
 var stockContent = document.getElementById("stock-content");
-var panelContent = document.getElementById("movement-content");
+var movementContent = document.getElementById("movement-content");
+var categoryContent = document.getElementById("category-content");
 var title = document.getElementById("title");
 
 stockTab.addEventListener("click", () => {
   stockTab.classList.add("active");
-  panelTab.classList.remove("active");
+  movementTab.classList.remove("active");
+  categoryTab.classList.remove("active");
 
   title.innerHTML = "Relatório de Estoque";
 
   stockContent.style.display = "block";
-  panelContent.style.display = "none";
+  movementContent.style.display = "none";
+  categoryContent.style.display = "none";
 });
 
-panelTab.addEventListener("click", () => {
+movementTab.addEventListener("click", () => {
   stockTab.classList.remove("active");
-  panelTab.classList.add("active");
+  categoryTab.classList.remove("active");
+  movementTab.classList.add("active");
   
   title.innerHTML = "Relatório de Movimentação";
 
   stockContent.style.display = "none";
-  panelContent.style.display = "block";
+  categoryContent.style.display = "none";
+  movementContent.style.display = "block";
+});
+
+categoryTab.addEventListener("click", () => {
+  categoryTab.classList.add("active");
+  stockTab.classList.remove("active");
+  movementTab.classList.remove("active");
+  
+  title.innerHTML = "Relatório de Categoria";
+
+  categoryContent.style.display = "block";
+  stockContent.style.display = "none";
+  movementContent.style.display = "none";
 });
 
 createProductButton.addEventListener("click", (event) => {

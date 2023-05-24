@@ -12,7 +12,7 @@ app.use("/", require("../controllers/stockController"));
 app.use("/", require("../controllers/modalController"));
 app.use("/", require("../controllers/productController"));
 app.use("/", require("../controllers/providerController"));
-
+app.use("/", require("../controllers/panelController"));
 
 app.listen(5050, () => {
   console.log("Servidor rodando na porta 5050");

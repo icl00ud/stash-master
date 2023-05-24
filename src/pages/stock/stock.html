@@ -54,63 +54,90 @@
     <div class="out-box">
       <h1 id="title">Relatório de Estoque</h1>
 
-      <div class="tabs">
-        <div class="tab">
-          <a class="tab-link active" id="stock-tab" href="#">Estoque</a>
+      <div class="inner-box">
+        <div class="tabs">
+          <div class="tab">
+            <a class="tab-link active" id="stock-tab" href="#">Estoque</a>
+          </div>
+          <div class="tab">
+            <a class="tab-link" id="movement-tab" href="#">Movimentação</a>
+          </div>
+          <div class="tab">
+            <a class="tab-link" id="category-tab" href="#">Categoria</a>
+          </div>
         </div>
-        <div class="tab">
-          <a class="tab-link" id="movement-tab" href="#">Movimentação</a>
+        <div id="stock-content">
+          <div class="grid">
+            <div class="buttons">
+              <button id="create-product">Adicionar Produto</button>
+              <button id="update-product">Alterar Produto</button>
+              <button id="delete-product">Excluir Produto</button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 10%;">Cód. Produto</th>
+                    <th style="width: 18%;">Nome Produto</th>
+                    <th style="width: 12%;">Qtd. Estoque</th>
+                    <th style="width: 12%;">Unid. de Medida</th>
+                    <th style="width: 12%;">Preço (R$)</th>
+                    <th style="width: 15%;">Data de Cadastro</th>
+                  </tr>
+                </thead>
+                <tbody id="table-items"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="movement-content" style="display: none;">
+          <div class="grid">
+            <div class="buttons">
+              <button id="create-movement">Movimentar Estoque</button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <H1>MODIFICAR AS COLUNAS DEPOIS QUANDO TIVER O QUE VAI SER POPULADO</H1>
+                    <th style="width: 10%;">Cód. Produto</th>
+                    <th style="width: 18%;">Nome Produto</th>
+                    <th style="width: 12%;">Qtd. Estoque</th>
+                    <th style="width: 12%;">Unid. de Medida</th>
+                    <th style="width: 12%;">Preço (R$)</th>
+                    <th style="width: 15%;">Data de Cadastro</th>
+                  </tr>
+                </thead>
+                <tbody id="table-items"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="category-content" style="display: none;">
+          <div class="grid">
+            <div class="buttons">
+              <button id="create-product">Adicionar Categoria</button>
+              <button id="update-product">Alterar Categoria</button>
+              <button id="delete-product">Excluir Categoria</button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 5%;">Cód. Categoria</th>
+                    <th style="width: 10%;">Nome Categoria</th>
+                    <th style="width: 18%;">Descrição Categoria</th>
+                    <th style="width: 10%;">Data de Cadastro</th>
+                  </tr>
+                </thead>
+                <tbody id="table-items"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div id="stock-content">
-        <div class="grid">
-          <div class="buttons">
-            <button id="create-product">Adicionar Produto</button>
-            <button id="update-product">Alterar Produto</button>
-            <button id="delete-product">Excluir Produto</button>
-          </div>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th style="width: 10%;">Cód. Produto</th>
-                  <th style="width: 18%;">Nome Produto</th>
-                  <th style="width: 12%;">Qtd. Estoque</th>
-                  <th style="width: 12%;">Unid. de Medida</th>
-                  <th style="width: 12%;">Preço (R$)</th>
-                  <th style="width: 15%;">Data de Cadastro</th>
-                </tr>
-              </thead>
-              <tbody id="table-items"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div id="movement-content" style="display: none;">
-        <div class="grid">
-          <div class="buttons">
-            <button id="create-movement">Movimentar Estoque</button>
-          </div>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th style="width: 10%;">Cód. Produto</th>
-                  <th style="width: 18%;">Nome Produto</th>
-                  <th style="width: 12%;">Qtd. Estoque</th>
-                  <th style="width: 12%;">Unid. de Medida</th>
-                  <th style="width: 12%;">Preço (R$)</th>
-                  <th style="width: 15%;">Data de Cadastro</th>
-                </tr>
-              </thead>
-              <tbody id="table-items"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
     </div>
   </main>
 

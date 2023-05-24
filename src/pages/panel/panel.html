@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="panel.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"/>
     <title>Smart Stash</title>
   </head>
   <body>
@@ -35,3 +32,54 @@
         <a><img class="icon-generic" src="settings.png" /></a>
       </div>
     </header>
+
+    <div id="modal-error" class="modal-error">
+      <div class="modal-error-content">
+        <p id="message-modal"></p>
+      </div>
+    </div>
+    <div id="createProductModal"></div>
+    <div id="updateProductModal"></div>
+    <div id="deleteProductModal"></div>
+  
+    <main>
+      <div class="out-box">
+        <h1 id="title">Painel</h1>
+  
+        <div class="inner-box">
+          <div class="tabs">
+            <div class="tab">
+              <a class="tab-link active" id="user-tab" href="#">Usuário</a>
+            </div>
+            <div class="tab">
+              <a class="tab-link" id="provider-tab" href="#">Fornecedor</a>
+            </div>
+          </div>
+          <div id="stock-content">
+            <div class="grid">
+              <div class="buttons">
+                <button id="create-product">Adicionar Usuário</button>
+                <button id="update-product">Alterar Usuário</button>
+                <button id="delete-product">Excluir Usuário</button>
+              </div>
+              <div class="table-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width: 10%;">Cód. Usuário</th>
+                      <th style="width: 15%;">Nome Usuário</th>
+                      <th style="width: 15%;">E-mail Usuário</th>
+                      <th style="width: 12%;">Senha Usuário</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table-items"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="panel.js"></script>
+  </body>
