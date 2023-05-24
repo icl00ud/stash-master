@@ -11,15 +11,6 @@ router.get("/panel", (req, res) => {
   res.sendFile(path.join(__dirname, "../../pages/panel/panel.html"));
 });
 
-router.patch("/user", async (req, res) => {
-  try {
-    await _handler.updateUser(req.body);
-    return res.status(200).json({ message: "" });
-  } catch (err) {
-    return res.status(500).json({ message: "Erro ao alterar o usuário" });
-  }
-});
-
 router.get("/user", async (req, res) => {
     try {
         const users = await _handler.getAllUsers();
@@ -30,5 +21,22 @@ router.get("/user", async (req, res) => {
     }
 });
 
+router.patch("/user", async (req, res) => {
+  try {
+    await _handler.updateUser(req.body);
+    return res.status(200).json({ message: "" });
+  } catch (err) {
+    return res.status(500).json({ message: "Erro ao alterar o usuário" });
+  }
+});
+
+router.delete("/user/:id", async (req, res) => {
+    try {
+        await _handler.deleteUserById(req.params.id);
+        return res.status(200).json({ message: "Usuário deletado com sucesso" });
+      } catch (err) {
+        return res.status(500).json({ message: "Erro ao deletar o usuário" });
+      }
+}) 
 
 module.exports = router;
