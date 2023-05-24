@@ -121,6 +121,11 @@ span {
   flex-direction: column;
 }
 
+.top-legend{
+  display: flex;
+  justify-content: space-between;
+}
+
 .tabs {
   display: flex;
   margin-bottom: 25px;

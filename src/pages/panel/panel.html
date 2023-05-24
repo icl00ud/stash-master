@@ -44,7 +44,10 @@
   
     <main>
       <div class="out-box">
-        <h1 id="title">Painel</h1>
+        <div class="top-legend">
+          <h1 id="title">Painel</h1>
+          <h1 id="welcome">Bem-vindo, Israel!</h1>
+        </div>
   
         <div class="inner-box">
           <div class="tabs">
@@ -55,7 +58,7 @@
               <a class="tab-link" id="provider-tab" href="#">Fornecedor</a>
             </div>
           </div>
-          <div id="stock-content">
+          <div id="user-content">
             <div class="grid">
               <div class="buttons">
                 <button id="create-product">Adicionar Usuário</button>
@@ -70,6 +73,29 @@
                       <th style="width: 15%;">Nome Usuário</th>
                       <th style="width: 15%;">E-mail Usuário</th>
                       <th style="width: 12%;">Senha Usuário</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table-items"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div id="provider-content" style="display: none;">
+            <div class="grid">
+              <div class="buttons">
+                <button id="create-product">Adicionar Fornecedor</button>
+                <button id="update-product">Alterar Fornecedor</button>
+                <button id="delete-product">Excluir Fornecedor</button>
+              </div>
+              <div class="table-container provider">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width: 10%;">Cód. Fornecedor</th>
+                      <th style="width: 15%;">Nome Fornecedor</th>
+                      <th style="width: 15%;">E-mail Fornecedor</th>
+                      <th style="width: 10%;">Senha Fornecedor</th>
                     </tr>
                   </thead>
                   <tbody id="table-items"></tbody>
