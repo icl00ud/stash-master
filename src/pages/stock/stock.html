@@ -1,53 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="stock.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <title>Smart Stash</title>
-  </head>
-  <body>
-    <header>
-      <div class="left">
-        <div class="logo"><img src="logo.png" /></div>
-        <span>|</span>
-        <nav>
-          <ul>
-            <li class="icon-text">
-              <img class="icon-nav" src="dropbox.png" /><a id="stock">Estoque</a>
-            </li>
-            <li class="icon-text">
-              <img class="icon-nav" src="id-card.png" /><a id="panel">Painel</a>
-            </li>
-          </ul>
-        </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="stock.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet" />
+  <title>Smart Stash</title>
+</head>
+<body>
+  <header>
+    <div class="left">
+      <div class="logo">
+        <img src="logo.png" />
       </div>
-      <div class="user-settings">
-        <a><img class="icon-generic" src="user.png" /></a>
-        <span>|</span>
-        <a><img class="icon-generic" src="settings.png" /></a>
-      </div>
-    </header>
-
-    <div id="modal-error" class="modal-error">
-      <div class="modal-error-content">
-        <p id="message-modal"></p>
-      </div>
+      <span>|</span>
+      <nav>
+        <ul>
+          <li class="icon-text">
+            <img class="icon-nav" src="dropbox.png" />
+            <a id="stock">Estoque</a>
+          </li>
+          <li class="icon-text">
+            <img class="icon-nav" src="id-card.png" />
+            <a id="panel">Painel</a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <div id="createProductModal"></div>
-    <div id="updateProductModal"></div>
-    <div id="deleteProductModal"></div>
+    <div class="user-settings">
+      <a>
+        <img class="icon-generic" src="user.png" />
+      </a>
+      <span>|</span>
+      <a>
+        <img class="icon-generic" src="settings.png" />
+      </a>
+    </div>
+  </header>
 
-    <main>
-      <div class="out-box">
-        <h1>Relatório de Estoque</h1>
+  <div id="modal-error" class="modal-error">
+    <div class="modal-error-content">
+      <p id="message-modal"></p>
+    </div>
+  </div>
+  <div id="createProductModal"></div>
+  <div id="updateProductModal"></div>
+  <div id="deleteProductModal"></div>
+
+  <main>
+    <div class="out-box">
+      <h1 id="title">Relatório de Estoque</h1>
+
+      <div class="tabs">
+        <div class="tab">
+          <a class="tab-link active" id="stock-tab" href="#">Estoque</a>
+        </div>
+        <div class="tab">
+          <a class="tab-link" id="movement-tab" href="#">Movimentação</a>
+        </div>
+      </div>
+
+      <div id="stock-content">
         <div class="grid">
           <div class="buttons">
             <button id="create-product">Adicionar Produto</button>
@@ -63,18 +79,41 @@
                   <th style="width: 12%;">Qtd. Estoque</th>
                   <th style="width: 12%;">Unid. de Medida</th>
                   <th style="width: 12%;">Preço (R$)</th>
-                  <th style="width: 13%;">Fornecedor</th>
                   <th style="width: 15%;">Data de Cadastro</th>
                 </tr>
               </thead>
-              <tbody id="table-items">
-              </tbody>
+              <tbody id="table-items"></tbody>
             </table>
           </div>
         </div>
       </div>
-    </main>
 
-    <script src="stock.js"></script>
-  </body>
+      <div id="movement-content" style="display: none;">
+        <div class="grid">
+          <div class="buttons">
+            <button id="create-movement">Movimentar Estoque</button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 10%;">Cód. Produto</th>
+                  <th style="width: 18%;">Nome Produto</th>
+                  <th style="width: 12%;">Qtd. Estoque</th>
+                  <th style="width: 12%;">Unid. de Medida</th>
+                  <th style="width: 12%;">Preço (R$)</th>
+                  <th style="width: 15%;">Data de Cadastro</th>
+                </tr>
+              </thead>
+              <tbody id="table-items"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="stock.js"></script>
+</body>
 </html>

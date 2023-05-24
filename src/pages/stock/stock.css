@@ -33,6 +33,12 @@ header {
   height: 50px;
 }
 
+#stock-content, #movement-content{
+  bottom: 0;
+  position: absolute;
+  width: 85%;
+}
+
 #stock,
 #panel {
   color: white;
@@ -113,6 +119,27 @@ span {
   height: calc(100vh - 75px);
   display: flex;
   flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  margin-right: 10px;
+}
+
+.tab-link {
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: #fff;
+  text-decoration: none;
+}
+
+.tab-link.active {
+  background-color: #007bff;
 }
 
 h1 {

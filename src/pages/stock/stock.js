@@ -1,14 +1,36 @@
 var createProductModal = document.getElementById("createProductModal");
 var updateProductModal = document.getElementById("updateProductModal");
 var deleteProductModal = document.getElementById("deleteProductModal");
-
 var updateProductButton = document.getElementById("update-product");
 var createProductButton = document.getElementById("create-product");
 var deleteProductButton = document.getElementById("delete-product");
 var stockHeaderButton = document.getElementById("stock");
 var panelHeaderButton = document.getElementById("panel");
+var stockTab = document.getElementById("stock-tab");
+var panelTab = document.getElementById("movement-tab");
+var stockContent = document.getElementById("stock-content");
+var panelContent = document.getElementById("movement-content");
+var title = document.getElementById("title");
 
-// Event listeners
+stockTab.addEventListener("click", () => {
+  stockTab.classList.add("active");
+  panelTab.classList.remove("active");
+
+  title.innerHTML = "Relatório de Estoque";
+
+  stockContent.style.display = "block";
+  panelContent.style.display = "none";
+});
+
+panelTab.addEventListener("click", () => {
+  stockTab.classList.remove("active");
+  panelTab.classList.add("active");
+  
+  title.innerHTML = "Relatório de Movimentação";
+
+  stockContent.style.display = "none";
+  panelContent.style.display = "block";
+});
 
 createProductButton.addEventListener("click", (event) => {
   loadModal("create-product");
@@ -106,9 +128,6 @@ async function populateGrid() {
 
     const priceCell = row.insertCell();
     priceCell.textContent = product.preco;
-
-    const supplierCell = row.insertCell();
-    supplierCell.textContent = product.fornecedor;
 
     const creationDateCell = row.insertCell();
     creationDateCell.textContent = product.dtCreation;
