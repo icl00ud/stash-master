@@ -5,6 +5,9 @@ var providerTab = document.getElementById("provider-tab");
 var userContent = document.getElementById("user-content");
 var providerContent = document.getElementById("provider-content");
 
+const userColumns = ["id", "user", "password", "email"];
+const providerColumns = ["idProvider", "name", "address", "email", "phone"];
+
 userTab.addEventListener("click", () => {
   userTab.classList.add("active");
   providerTab.classList.remove("active");
@@ -40,29 +43,23 @@ panelHeaderButton.addEventListener("click", (event) => {
 });
 
 window.addEventListener("load", async () => {
-  await populateGrid();
+  await populateGrid("/user", userColumns, "table-users");
+  await populateGrid("/provider", providerColumns, "table-providers");
 });
 
-async function populateGrid() {
-  const grid = document.getElementById("table-users");
+async function populateGrid(endpoint, columns, gridName) {
+  const grid = document.getElementById(gridName);
   grid.innerHTML = "";
 
-  const response = await fetch("/user");
-  const users = await response.json();
-
-  for (const user of users.users[0]) {
+  const response = await fetch(`${endpoint}`);
+  const data = await response.json();
+  console.log(data)
+  for (const item of data) {
     const row = grid.insertRow();
 
-    const idCell = row.insertCell();
-    idCell.textContent = user.id;
-
-    const nameCell = row.insertCell();
-    nameCell.textContent = user.user;
-
-    const unitCell = row.insertCell();
-    unitCell.textContent = user.password;
-
-    const stockCell = row.insertCell();
-    stockCell.textContent = user.email;
+    for (const column of columns) {
+      const cell = row.insertCell();
+      cell.textContent = item[column];
+    }
   }
 }
