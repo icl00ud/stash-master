@@ -53,7 +53,6 @@ async function populateGrid(endpoint, columns, gridName) {
 
   const response = await fetch(`${endpoint}`);
   const data = await response.json();
-  console.log(data)
   for (const item of data) {
     const row = grid.insertRow();
 

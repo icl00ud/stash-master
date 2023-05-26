@@ -14,6 +14,10 @@ var movementContent = document.getElementById("movement-content");
 var categoryContent = document.getElementById("category-content");
 var title = document.getElementById("title");
 
+const productColumns = ["idProduct", "nome", "qtdEstoque", "unidMedida", "preco", "dtCreation"];
+const movementColumns = ["idMovement", "type", "date", "quantityMoved", "description", "origin", "destination"];
+const categoryColumns = ["idCategory", "category", "description", "dtCreation"];
+
 stockTab.addEventListener("click", () => {
   stockTab.classList.add("active");
   movementTab.classList.remove("active");
@@ -30,7 +34,7 @@ movementTab.addEventListener("click", () => {
   stockTab.classList.remove("active");
   categoryTab.classList.remove("active");
   movementTab.classList.add("active");
-  
+
   title.innerHTML = "Relatório de Movimentação";
 
   stockContent.style.display = "none";
@@ -42,7 +46,7 @@ categoryTab.addEventListener("click", () => {
   categoryTab.classList.add("active");
   stockTab.classList.remove("active");
   movementTab.classList.remove("active");
-  
+
   title.innerHTML = "Relatório de Categoria";
 
   categoryContent.style.display = "block";
@@ -63,11 +67,15 @@ deleteProductButton.addEventListener("click", (event) => {
 });
 
 window.addEventListener("load", async () => {
-  await populateGrid();
+  await populateGrid("/product", productColumns, "product-items");
+  await populateGrid("/category", categoryColumns, "category-items");
+  await populateGrid("/movement", movementColumns, "movement-items");
 });
 
 document.addEventListener("reloadGrid", async () => {
-  await populateGrid();
+  await populateGrid("/product", productColumns, "product-items");
+  await populateGrid("/category", categoryColumns, "category-items");
+  await populateGrid("/movement", movementColumns, "movement-items");
 });
 
 stockHeaderButton.addEventListener("click", (event) => {
@@ -122,32 +130,20 @@ function loadModal(button) {
   xhr.send();
 }
 
-async function populateGrid() {
-  const grid = document.getElementById("table-items");
+async function populateGrid(endpoint, columns, gridName) {
+  const grid = document.getElementById(gridName);
   grid.innerHTML = "";
 
-  const response = await fetch("/product");
-  const products = await response.json();
+  const response = await fetch(`${endpoint}`);
+  const data = await response.json();
 
-  for (const product of products[0]) {
+  console.log(`Vez do ${endpoint}`, data)
+  for (const item of data) {
     const row = grid.insertRow();
 
-    const idCell = row.insertCell();
-    idCell.textContent = product.idProduct;
-
-    const nameCell = row.insertCell();
-    nameCell.textContent = product.nome;
-
-    const stockCell = row.insertCell();
-    stockCell.textContent = product.qtdEstoque;
-
-    const unitCell = row.insertCell();
-    unitCell.textContent = product.unidMedida;
-
-    const priceCell = row.insertCell();
-    priceCell.textContent = product.preco;
-
-    const creationDateCell = row.insertCell();
-    creationDateCell.textContent = product.dtCreation;
+    for (const column of columns) {
+      const cell = row.insertCell();
+      cell.textContent = item[column];
+    }
   }
 }

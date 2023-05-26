@@ -13,6 +13,8 @@ app.use("/", require("../controllers/modalController"));
 app.use("/", require("../controllers/productController"));
 app.use("/", require("../controllers/providerController"));
 app.use("/", require("../controllers/panelController"));
+app.use("/", require("../controllers/categoryController"));
+app.use("/", require("../controllers/movementController"));
 
 app.listen(5050, () => {
   console.log("Servidor rodando na porta 5050");
