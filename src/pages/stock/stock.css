@@ -236,7 +236,6 @@ td:last-child::after {
 
 thead > tr {
   background-color: #000000;
-  overscroll-behavior-block: contain ;
   border-bottom: 1px solid #c5c5c5;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
 }
