@@ -15,7 +15,7 @@ var categoryContent = document.getElementById("category-content");
 var title = document.getElementById("title");
 
 const productColumns = ["idProduct", "nome", "qtdEstoque", "unidMedida", "preco", "dtCreation"];
-const movementColumns = ["idMovement", "type", "date", "quantityMoved", "description", "origin", "destination"];
+const movementColumns = ["idMovement", "nome", "quantityMoved", "type", "date", "description", "origin", "destination"];
 const categoryColumns = ["idCategory", "category", "description", "dtCreation"];
 
 stockTab.addEventListener("click", () => {

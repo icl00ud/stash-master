@@ -2,7 +2,21 @@ const db = require("../database/db");
 
 async function getAllMovements() {
   let connection;
-  const sqlQuery = "SELECT * FROM TBLMovement";
+  const sqlQuery = 
+  `SELECT
+  m.idMovement,
+  p.nome,
+  m.quantityMoved,
+  m.type,
+  m.date,
+  m.description,
+  ow.name AS origin,
+  dw.name AS destination
+FROM
+tblmovement m
+INNER JOIN tblwarehouse ow ON m.idOriginWH = ow.idWarehouse
+INNER JOIN tblwarehouse dw ON m.idDestinationWH = dw.idWarehouse
+LEFT JOIN tblproduct p ON m.idProduct = p.idProduct;`;
 
   try {
     connection = await db.Connect();
@@ -16,5 +30,5 @@ async function getAllMovements() {
 }
 
 module.exports = {
-    getAllMovements
+  getAllMovements,
 };
