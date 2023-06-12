@@ -15,14 +15,13 @@ async function getAllUsers() {
   }
 }
 
-async function updateUser(user) {
+async function updateUser(newUser) {
   let connection;
-  const { id, user, password, email } = user;
+  const sqlQuery = "UPDATE FROM TBLUser SET user = ?, password = ?, email = ? WHERE id = ?";
+  const { id, user, password, email } = newUser;
 
   try {
     connection = await db.Connect();
-    const sqlQuery =
-      "UPDATE FROM TBLUser SET user = ?, password = ?, email = ? WHERE id = ?";
 
     await connection.query(sqlQuery, [user, password, email, id]);
   } catch (error) {

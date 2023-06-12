@@ -5,8 +5,6 @@ async function getAllMovements() {
     return await _repository.getAll();
   } catch (error) {
     throw error;
-  } finally {
-    if (connection) connection.end();
   }
 }
 
