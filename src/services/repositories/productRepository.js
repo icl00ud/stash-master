@@ -14,6 +14,19 @@ async function getAll() {
   }
 }
 
+async function getProductByName(productName) {
+  let connection;
+  const sqlQuery = "SELECT * FROM TBLProduct WHERE nome = ?";
+
+  try {
+    return await connection.query(sqlQuery, productName);
+  } catch (error) {
+    return error
+  } finally {
+    if(connection) connection.end()
+  }
+}
+
 async function getProductTab() {
   const connection = await db.Connect();
   const sqlQuery = `SELECT
@@ -119,4 +132,5 @@ module.exports = {
   insertProduct,
   updateProduct,
   deleteProduct,
+  getProductByName
 };
