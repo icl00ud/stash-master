@@ -67,7 +67,7 @@ deleteProductButton.addEventListener("click", (event) => {
 });
 
 window.addEventListener("load", async () => {
-  await populateGrid("/product", productColumns, "product-items");
+  await populateGrid("/productTab", productColumns, "product-items");
   await populateGrid("/category", categoryColumns, "category-items");
   await populateGrid("/movement", movementColumns, "movement-items");
 });
@@ -136,8 +136,7 @@ async function populateGrid(endpoint, columns, gridName) {
 
   const response = await fetch(`${endpoint}`);
   const data = await response.json();
-
-  console.log(`Vez do ${endpoint}`, data)
+  
   for (const item of data) {
     const row = grid.insertRow();
 

@@ -11,6 +11,15 @@ router.get("/product", async (req, res) => {
   }
 });
 
+router.get("/productTab", async (req, res) => {
+  try {
+    const items = await _handler.getProductTab();
+    return res.status(200).json(items[0]);
+  } catch (err) {
+    return res.status(500).json({ message: "Erro ao buscar os produtos" });
+  }
+});
+
 router.get("/product/:id", async (req, res) => {
   try {
     const product = await _handler.getProductById(req.params.id);

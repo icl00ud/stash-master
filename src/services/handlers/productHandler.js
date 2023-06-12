@@ -15,6 +15,30 @@ async function getAllProducts() {
   }
 }
 
+async function getProductTab() {
+  const sqlQuery = `SELECT
+  A.idProduct,
+  A.nome,
+  B.nome AS 'unidMedida',
+  A.qtdEstoque,
+  A.preco,
+  A.dtCreation
+FROM
+  TBLProduct A
+  LEFT JOIN TBLMedida B ON A.idMedida = B.idMedida`;
+  const connection = await db.Connect();
+
+  try {
+    const results = await connection.query(sqlQuery);
+    return results;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  } finally {
+    connection.end();
+  }
+}
+
 async function getProductById(productId) {
   const sqlQuery = "SELECT * FROM TBLProduct WHERE idProduct = ?";
   const connection = await db.Connect();
@@ -136,4 +160,5 @@ module.exports = {
   getAllProducts,
   getProductById,
   deleteProduct,
+  getProductTab
 };
