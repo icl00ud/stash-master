@@ -1,4 +1,4 @@
-const _repository = require("../repositories/categoryRepositorie");
+const _repository = require("../repositories/categoryRepository");
 
 async function getAllCategories() {
   try {
