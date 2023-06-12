@@ -1,50 +1,24 @@
-const db = require("../database/db");
+const _repository = require("../repositories/productRepository");
 
 async function getAllProducts() {
-  const sqlQuery = "SELECT * FROM TBLProduct";
-  const connection = await db.Connect();
-
   try {
-    const results = await connection.query(sqlQuery);
-    return results;
+    return await _repository.getAll();
   } catch (err) {
-    console.error(err);
-    throw err;
-  } finally {
-    connection.end();
+    return err;
   }
 }
 
 async function getProductTab() {
-  const sqlQuery = `SELECT
-  A.idProduct,
-  A.nome,
-  B.nome AS 'unidMedida',
-  A.qtdEstoque,
-  A.preco,
-  A.dtCreation
-FROM
-  TBLProduct A
-  LEFT JOIN TBLMedida B ON A.idMedida = B.idMedida`;
-  const connection = await db.Connect();
-
   try {
-    const results = await connection.query(sqlQuery);
-    return results;
+    return await _repository.getProductTab();
   } catch (err) {
-    console.error(err);
-    throw err;
-  } finally {
-    connection.end();
+    return err;
   }
 }
 
 async function getProductById(productId) {
-  const sqlQuery = "SELECT * FROM TBLProduct WHERE idProduct = ?";
-  const connection = await db.Connect();
-
   try {
-    const result = await connection.query(sqlQuery, [productId]);
+    const result = await _repository.getProductById(productId);
 
     if (result[0].length === 0) {
       const error = new Error("Produto não encontrado");
@@ -54,10 +28,7 @@ async function getProductById(productId) {
 
     return result[0];
   } catch (err) {
-    console.error(err);
-    throw err;
-  } finally {
-    if (connection !== null) connection.end();
+    return err;
   }
 }
 
@@ -73,29 +44,19 @@ async function insertProduct(product) {
     dtCreation: new Date().toLocaleString("pt-BR"),
   };
 
-  const sqlQuery =
-    "INSERT INTO TBLProduct (nome, qtdEstoque, unidMedida, preco, fornecedor, dtCreation) VALUES (?,?,?,?,?,?)";
-  const connection = await db.Connect();
   try {
-    await connection.query(sqlQuery, Object.values(data));
+    await _repository.insertProduct(data);
   } catch (err) {
-    console.error(err);
-    throw err;
-  } finally {
-    connection.end();
+    return err;
   }
 }
 
 async function updateProduct(product) {
   if (!product) throw new Error("Product object is required.");
 
-  let connection;
-
   try {
-    connection = await db.Connect();
-
     // obter o produto atual do banco de dados
-    const [rows] = await connection.query("SELECT * FROM TBLProduct WHERE idProduct = ?",[product.idProduct]);
+    const [rows] = await _repository.getProductById(product.idProduct);
     const currentProduct = rows[0];
 
     if (!currentProduct) throw new Error("Produto inexistente");
@@ -103,56 +64,37 @@ async function updateProduct(product) {
     // criar um objeto com as propriedades do produto que foram atualizadas
     const updatedFields = {
       nome: product.name !== currentProduct.nome ? product.name : undefined,
-      qtdEstoque:product.quantity !== currentProduct.qtdEstoque ? product.quantity : undefined,
-      unidMedida: product.unit !== currentProduct.unidMedida ? product.unit : undefined,
+      qtdEstoque:
+        product.quantity !== currentProduct.qtdEstoque
+          ? product.quantity
+          : undefined,
+      unidMedida:
+        product.unit !== currentProduct.unidMedida ? product.unit : undefined,
       preco: product.price !== currentProduct.preco ? product.price : undefined,
-      fornecedor: product.provider !== currentProduct.fornecedor ? product.provider : undefined,
+      fornecedor:
+        product.provider !== currentProduct.fornecedor
+          ? product.provider
+          : undefined,
     };
 
-    // montar a cláusula SET e o array de valores para a atualização
-    const setClause = Object.entries(updatedFields)
-      .filter(([_, value]) => value !== undefined)
-      .map(([key]) => `${key} = ?`)
-      .join(", ");
-    const values = Object.entries(updatedFields)
-      .filter(([_, value]) => value !== undefined)
-      .map(([_, value]) => value);
-
-    const sqlQuery = `UPDATE TBLProduct SET ${setClause} WHERE idProduct = ?`;
-    await connection.query(sqlQuery, [...values, product.idProduct]);
+    await _repository.updateProduct(updatedFields);
   } catch (error) {
-    return console.error(`Failed to update product: ${error.message}`);
-  } finally {
-    if (connection) {
-      connection.end();
-    }
+    return error;
   }
 }
 
 async function deleteProduct(id) {
   if (!id) throw new Error("'id' is null");
 
-  let connection;
-
   try {
-    connection = await db.Connect();
-    var sqlQueryCheck = "SELECT COUNT(*) AS count FROM TBLProduct WHERE idProduct = ?";
-    const [rows] = await connection.query(sqlQueryCheck, id);
-
-    const count = rows[0].count;
-    if (count === 0) throw new Error(`Product with id ${id} does not exist`);
-    
-    var sqlQuery = "DELETE FROM TBLProduct WHERE idProduct = ?";
-    await connection.query(sqlQuery, id);
-    return true;
+    const isDeleted = await _repository.deleteProduct(id);
+    if (isDeleted) return true;
+    return false;
   } catch (error) {
     console.error(`Failed to delete product: ${error.message}`);
     return false;
-  } finally {
-    if (connection) connection.end();
   }
 }
-
 
 module.exports = {
   insertProduct,
@@ -160,5 +102,5 @@ module.exports = {
   getAllProducts,
   getProductById,
   deleteProduct,
-  getProductTab
+  getProductTab,
 };

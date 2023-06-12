@@ -1,17 +1,10 @@
-const db = require("../database/db");
+const _repository = require("../repositories/categoryRepositorie");
 
 async function getAllCategories() {
-  let connection;
-  const sqlQuery = "SELECT * FROM TBLCategory";
-
   try {
-    connection = await db.Connect();
-
-    return await connection.query(sqlQuery);
+    return await _repository.getAll();
   } catch (error) {
     throw error;
-  } finally {
-    if (connection) connection.end();
   }
 }
 

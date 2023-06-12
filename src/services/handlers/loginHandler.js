@@ -1,14 +1,11 @@
-const db = require("../database/db");
+const _repository = require("../repositories/loginRepository");
 
 async function authenticateUser(req) {
-  let connection = await db.Connect();
-  
   try {
     const { user, password } = req;
-    const sql = "SELECT user, password FROM TBLUser WHERE user = ? AND password = ?";
-    const [rows, fields] = await connection.execute(sql, [user, password]);
+    const userInDB = await _repository.findUserByPassAndName(user, password);
 
-    if (rows.length > 0) {
+    if (userInDB.length > 0) {
       const { user: username, password: passwordHash } = rows[0];
       if (username === user && passwordHash === password) 
         return true;
@@ -16,10 +13,7 @@ async function authenticateUser(req) {
       return false;
     }
   } catch (err) {
-    new Error("Preencha os campos!");
-    return false;
-  } finally {
-    if (connection !== null) connection.end();
+    return err;
   }
 }
 
