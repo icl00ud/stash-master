@@ -27,13 +27,12 @@ async function getProductByName(productName) {
   }
 }
 
-async function getProductTab() {
+async function getProductReport() {
   const connection = await db.Connect();
   const sqlQuery = `SELECT
     A.idProduct,
     A.nome,
     B.nome AS 'unidMedida',
-    A.qtdEstoque,
     A.preco,
     A.dtCreation
   FROM
@@ -127,7 +126,7 @@ async function deleteProduct(id) {
 
 module.exports = {
   getAll,
-  getProductTab,
+  getProductReport,
   getProductById,
   insertProduct,
   updateProduct,

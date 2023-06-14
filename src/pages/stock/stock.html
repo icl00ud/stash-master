@@ -53,14 +53,17 @@
   <main>
     <div class="out-box">
       <div class="top-legend">
-        <h1 id="title">Relatório de Estoque</h1>
+        <h1 id="title">Relatório de Produto</h1>
         <h1 id="welcome">Bem-vindo, Israel!</h1>
       </div>
 
       <div class="inner-box">
         <div class="tabs">
           <div class="tab">
-            <a class="tab-link active" id="stock-tab" href="#">Estoque</a>
+            <a class="tab-link" id="stock-tab" href="#">Estoque</a>
+          </div>
+          <div class="tab">
+            <a class="tab-link active" id="product-tab" href="#">Produto</a>
           </div>
           <div class="tab">
             <a class="tab-link" id="movement-tab" href="#">Movimentação</a>
@@ -69,7 +72,7 @@
             <a class="tab-link" id="category-tab" href="#">Categoria</a>
           </div>
         </div>
-        <div id="stock-content">
+        <div id="product-content">
           <div class="grid">
             <div class="buttons">
               <button id="create-product">Adicionar Produto</button>
@@ -82,13 +85,33 @@
                   <tr>
                     <th style="width: 10%;">Cód. Produto</th>
                     <th style="width: 18%;">Nome Produto</th>
-                    <th style="width: 12%;">Qtd. Estoque</th>
                     <th style="width: 12%;">Unid. de Medida</th>
                     <th style="width: 12%;">Preço (R$)</th>
                     <th style="width: 15%;">Data de Cadastro</th>
                   </tr>
                 </thead>
                 <tbody id="product-items"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="stock-content" style="display: none;">
+          <div class="grid">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 10%;">Cód. Estoque</th>
+                    <th style="width: 18%;">Nome Produto</th>
+                    <th style="width: 18%;">Preço (R$)</th>
+                    <th style="width: 12%;">Unid. de Medida</th>
+                    <th style="width: 12%;">Quantidade Armazenada</th>
+                    <th style="width: 15%;">Nome do Armazem</th>
+                    <th style="width: 15%;">Endereço do Armazem</th>
+                  </tr>
+                </thead>
+                <tbody id="stock-items"></tbody>
               </table>
             </div>
           </div>

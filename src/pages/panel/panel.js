@@ -26,10 +26,10 @@ providerTab.addEventListener("click", () => {
 
 stockHeaderButton.addEventListener("click", (event) => {
   var urlAtual = window.location.href;
-  if (urlAtual.includes("/stock")) {
+  if (urlAtual.includes("/stockPage")) {
     return;
   } else {
-    window.location.href = "/stock";
+    window.location.href = "/stockPage";
   }
 });
 

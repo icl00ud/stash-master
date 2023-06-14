@@ -2,6 +2,21 @@ const db = require("../database/db");
 
 async function getAll() {
   let connection;
+  const sqlQuery = "SELECT * FROM TBLMovement";
+
+  try {
+    connection = await db.Connect();
+
+    return await connection.query(sqlQuery);
+  } catch (error) {
+    throw error;
+  } finally {
+    if (connection) connection.end();
+  }
+}
+
+async function getMovReport() {
+  let connection;
   const sqlQuery = `SELECT
     m.idMovement,
     p.nome,
@@ -30,4 +45,5 @@ async function getAll() {
 
 module.exports = {
   getAll,
+  getMovReport
 };

@@ -8,9 +8,9 @@ async function getAllProducts() {
   }
 }
 
-async function getProductTab() {
+async function getProductReport() {
   try {
-    return await _repository.getProductTab();
+    return await _repository.getProductReport();
   } catch (err) {
     return err;
   }
@@ -128,5 +128,5 @@ module.exports = {
   getAllProducts,
   getProductById,
   deleteProduct,
-  getProductTab,
+  getProductReport,
 };

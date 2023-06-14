@@ -8,6 +8,15 @@ async function getAllMovements() {
   }
 }
 
+async function getMovReport() {
+  try {
+    return await _repository.getMovReport();
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getAllMovements,
+  getMovReport
 };

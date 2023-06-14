@@ -11,4 +11,13 @@ router.get("/category", async (req, res) => {
   }
 });
 
+router.get("/category/report", async (req, res) => {
+  try {
+    const result = await _handler.getCategoryReport();
+    return res.status(200).json(result[0]);
+  } catch (err) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

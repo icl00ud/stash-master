@@ -8,6 +8,15 @@ async function getAllCategories() {
   }
 }
 
+async function getCategoryReport() {
+  try {
+    return await _repository.getAll();
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
-  getAllCategories
+  getAllCategories,
+  getCategoryReport
 };
