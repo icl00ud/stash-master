@@ -29,6 +29,15 @@ router.post("/provider", (req, res) => {
   }
 });
 
+router.post("/provider/autocomplete", async (req, res) => {
+  try {
+    const providers = await _handler.getAutoComplete(req.body.name);
+    return res.status(200).json(providers);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.patch("/provider", (req, res) => {
   try {
     _handler.updateProvider(req.body);

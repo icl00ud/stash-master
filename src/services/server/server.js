@@ -15,6 +15,7 @@ app.use("/", require("../controllers/providerController"));
 app.use("/", require("../controllers/panelController"));
 app.use("/", require("../controllers/categoryController"));
 app.use("/", require("../controllers/movementController"));
+app.use("/", require("../controllers/unitController"));
 
 app.listen(5050, () => {
   console.log("Servidor rodando na porta 5050");

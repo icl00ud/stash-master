@@ -14,6 +14,20 @@ async function getAll() {
   }
 }
 
+async function getAutoComplete(name) {
+  const connection = await db.Connect();
+  const sqlQuery = `SELECT name FROM TBLProvider WHERE name LIKE '${name}%'`;
+
+  try {
+    const result = await connection.query(sqlQuery, name);
+    return result[0];
+  } catch (error) {
+    return error;
+  } finally {
+    if (connection) connection.end();
+  }
+}
+
 async function getProviderById(idProvider) {
   const connection = await db.Connect();
   const sqlQuery = "SELECT * FROM TBLProvider WHERE idProvider = ?";
@@ -79,6 +93,7 @@ async function deleteProviderById(idProvider) {
 
 module.exports = {
   getAll,
+  getAutoComplete,
   getProviderById,
   insertProvider,
   updateProvider,

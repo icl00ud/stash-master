@@ -16,18 +16,9 @@
             <input type="text" class="modal-input" name="name" autocomplete="off" required />
             <label for="name">Nome do produto</label>
           </div>
-          <div class="input-wrapper">
-            <input type="text" class="modal-input" name="quantity" required />
-            <label for="quantity">Quantidade</label>
-          </div>
           <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
-            <select style="width: 80%;" class="modal-input" name="select" required>
+            <select style="width: 80%;" class="modal-input" name="select" id="unit-select" required>
               <option value="">Selecione a unidade de medida</option>
-              <option value="Kg">Kilograma</option>
-              <option value="g">grama</option>
-              <option value="Un">Unidade</option>
-              <option value="L">Litro</option>
-              <option value="Caixa">Caixa</option>
             </select>
           </div>
           <div class="input-wrapper">
@@ -35,7 +26,7 @@
             <label for="preco">Preço (R$)</label>
           </div>
           <div class="input-wrapper">
-            <input type="text" class="modal-input" name="provider" required />
+            <input type="text" class="modal-input" name="provider" id="input-provider" required />
             <label for="provider">Fornecedor</label>
           </div>      
         </form>

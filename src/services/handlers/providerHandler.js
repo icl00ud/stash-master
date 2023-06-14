@@ -9,6 +9,15 @@ async function getAllProviders() {
   }
 }
 
+async function getAutoComplete(name) {
+  try {
+    return await _repository.getAutoComplete(name);
+  } catch (error) {
+    console.log("Mensagem de erro: ", error);
+    return error;
+  }
+}
+
 async function getProviderById(idProvider) {
   try {
     return await _repository.getProviderById(idProvider);
@@ -58,6 +67,7 @@ async function deleteProviderById(idProvider) {
 
 module.exports = {
   getAllProviders,
+  getAutoComplete,
   getProviderById,
   insertProvider,
   updateProvider,

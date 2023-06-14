@@ -16,9 +16,32 @@ var movementContent = document.getElementById("movement-content");
 var categoryContent = document.getElementById("category-content");
 var title = document.getElementById("title");
 
-const stockColumns = ["stockId", "productName", "productPrice", "unit", "stockedQuantity", "warehouseName", "warehouseAddress"];
-const productColumns = ["idProduct", "nome", "unidMedida", "preco", "dtCreation"];
-const movementColumns = ["idMovement", "nome", "quantityMoved", "type", "date", "description", "origin", "destination"];
+const stockColumns = [
+  "stockId",
+  "productName",
+  "productPrice",
+  "unit",
+  "stockedQuantity",
+  "warehouseName",
+  "warehouseAddress",
+];
+const productColumns = [
+  "idProduct",
+  "nome",
+  "unidMedida",
+  "preco",
+  "dtCreation",
+];
+const movementColumns = [
+  "idMovement",
+  "nome",
+  "quantityMoved",
+  "type",
+  "date",
+  "description",
+  "origin",
+  "destination",
+];
 const categoryColumns = ["idCategory", "category", "description", "dtCreation"];
 
 productTab.addEventListener("click", () => {
@@ -124,7 +147,8 @@ panelHeaderButton.addEventListener("click", (event) => {
 // Functions
 
 function loadModal(button) {
-  var url, modal, scriptSrc;
+  var url, modal, scriptSrc, commonScriptSrc = "commonFunctions.js";
+
   switch (button) {
     case "create-product":
       url = "/stockPage/create_product";
@@ -142,14 +166,20 @@ function loadModal(button) {
       scriptSrc = "delete-product.js";
       break;
   }
+
+  var sources = [scriptSrc, commonScriptSrc];
+
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       modal.innerHTML = this.responseText;
-      var script = document.createElement("script");
-      script.src = scriptSrc;
-      document.body.appendChild(script);
+      sources.forEach((source) => {
+        var script = document.createElement("script");
+        script.src = source;
+        script.type = 'module';
+        document.body.appendChild(script);
+      });
     }
   };
   xhr.send();
@@ -161,7 +191,7 @@ async function populateGrid(endpoint, columns, gridName) {
 
   const response = await fetch(`${endpoint}`);
   const data = await response.json();
-  
+
   for (const item of data) {
     const row = grid.insertRow();
 

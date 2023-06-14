@@ -1,7 +1,9 @@
 var cancelButton = document.getElementById("cancel");
 var saveButton = document.getElementById("save");
-
-// Event listener
+var select = document.getElementById("unit-select");
+var inputProvider = document.getElementById("input-provider");
+ 
+// Event listener e eventos
 
 cancelButton.addEventListener("click", (event) => {
   closeModalProduct();
@@ -11,6 +13,14 @@ saveButton.addEventListener("click", async (event) => {
   sendData();
 });
 
+select.addEventListener("click", async (event) => {
+  var selectId = "unit-select";
+  var apiUrl = "/unit/select";
+
+  emitEvent("loadSelect", {selectId, apiUrl});
+});
+
+inputProvider.addEventListener("keyup", debounce(emitAutocompleteEvent, 300));
 
 // Functions
 
@@ -55,10 +65,10 @@ async function sendData() {
   }
 }
 
-function emitEvent(eventName, detail = null) {
+function emitEvent(eventName, ...detail) {
   const customEvent = new CustomEvent(eventName, {
     bubbles: true,
-    detail: detail,
+    detail: detail
   });
 
   document.dispatchEvent(customEvent);
@@ -82,4 +92,22 @@ function displayModal(message) {
       }, 1000);
     }, 3000);
   }
+}
+
+function debounce(func, delay) {
+  let timeoutId;
+  
+  return function() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(this, arguments), delay);
+  };
+}
+
+function emitAutocompleteEvent() {
+  var inputValue = inputProvider.value;
+  var apiUrl = "/provider/autocomplete";
+  var selectId = "input-provider";
+  
+  if (inputValue.length === 0) return;
+  emitEvent("autocomplete", { apiUrl, inputValue, selectId });
 }
