@@ -11,10 +11,19 @@ router.get("/provider", async (req, res) => {
   }
 });
 
-router.get("/provider/:id", async (req, res) => {
+router.get("/provider/select/:id", async (req, res) => {
   try {
     const providers = await _handler.getProviderById(req.params.id);
     return res.status(200).json(providers);
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
+  }
+});
+
+router.get("/provider/select", async (req, res) => {
+  try {
+    const providers = await _handler.getSelectOptions();
+    return res.status(200).json(providers[0]);
   } catch (err) {
     return res.status(404).json({ message: err.message });
   }

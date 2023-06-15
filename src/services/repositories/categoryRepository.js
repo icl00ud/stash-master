@@ -14,6 +14,22 @@ async function getAll() {
     }
 }
 
+async function getCategoryNames() {
+    let connection;
+    const sqlQuery = "SELECT idCategory AS 'id', category AS 'text' FROM TBLCategory";
+
+    try {
+        connection = await db.Connect();
+        return await connection.query(sqlQuery);
+    } catch (error) {
+        return error
+    } finally {
+        if(connection) 
+            connection.end();
+    }
+}
+
 module.exports = {
-    getAll
+    getAll,
+    getCategoryNames
 }

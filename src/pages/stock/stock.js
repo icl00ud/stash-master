@@ -16,32 +16,9 @@ var movementContent = document.getElementById("movement-content");
 var categoryContent = document.getElementById("category-content");
 var title = document.getElementById("title");
 
-const stockColumns = [
-  "stockId",
-  "productName",
-  "productPrice",
-  "unit",
-  "stockedQuantity",
-  "warehouseName",
-  "warehouseAddress",
-];
-const productColumns = [
-  "idProduct",
-  "nome",
-  "unidMedida",
-  "preco",
-  "dtCreation",
-];
-const movementColumns = [
-  "idMovement",
-  "nome",
-  "quantityMoved",
-  "type",
-  "date",
-  "description",
-  "origin",
-  "destination",
-];
+const stockColumns = ["stockId", "productName", "productPrice", "unit", "stockedQuantity", "warehouseName", "warehouseAddress"];
+const productColumns = ["idProduct","nome","unidMedida","preco","dtCreation"];
+const movementColumns = ["idMovement","nome","quantityMoved","type","date","description","origin","destination"];
 const categoryColumns = ["idCategory", "category", "description", "dtCreation"];
 
 productTab.addEventListener("click", () => {
@@ -191,7 +168,7 @@ async function populateGrid(endpoint, columns, gridName) {
 
   const response = await fetch(`${endpoint}`);
   const data = await response.json();
-
+  
   for (const item of data) {
     const row = grid.insertRow();
 

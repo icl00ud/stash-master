@@ -27,6 +27,15 @@ async function getProviderById(idProvider) {
   }
 }
 
+async function getSelectOptions() {
+  try {
+    return await _repository.getProviderNameAndId();
+  } catch (error) {
+    console.error("Mensagem de erro: ", error);
+    return error;
+  }
+}
+
 async function insertProvider(provider) {
   try {
     const result = await _repository.insertProvider(provider);
@@ -68,6 +77,7 @@ async function deleteProviderById(idProvider) {
 module.exports = {
   getAllProviders,
   getAutoComplete,
+  getSelectOptions,
   getProviderById,
   insertProvider,
   updateProvider,

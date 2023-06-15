@@ -42,6 +42,20 @@ async function getProviderById(idProvider) {
   }
 }
 
+async function getProviderNameAndId() {
+  let connection;
+  const sqlQuery = "SELECT idProvider AS 'id', name AS 'text' FROM TBLProvider";
+
+  try {
+    connection  = await db.Connect();
+    return await connection.query(sqlQuery);
+  } catch (error) {
+    return error
+  } finally {
+    if (connection) connection.end()
+  }
+}
+
 async function insertProvider(provider) {
   const connection = await db.Connect();
   const sqlQuery = "INSERT INTO TBLProvider (name, address, email, phone) VALUES (?, ?, ?, ?)";
@@ -98,4 +112,5 @@ module.exports = {
   insertProvider,
   updateProvider,
   deleteProviderById,
+  getProviderNameAndId
 };

@@ -2,7 +2,7 @@ const db = require("../database/db");
 
 async function getUnitOptions() {
     let connection;
-    const sqlQuery = "SELECT idMedida, nome FROM TBLMedida"
+    const sqlQuery = "SELECT idMedida AS 'id', nome AS 'text' FROM TBLMedida"
 
     try {
         connection = await db.Connect();

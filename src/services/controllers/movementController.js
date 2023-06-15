@@ -16,7 +16,7 @@ router.get("/movement/report", async (req, res) => {
     const result = await _handler.getMovReport();
     return res.status(200).json(result[0]);
   } catch (err) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ err });
   }
 });
 

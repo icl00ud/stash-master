@@ -1,8 +1,9 @@
 var cancelButton = document.getElementById("cancel");
 var saveButton = document.getElementById("save");
-var select = document.getElementById("unit-select");
-var inputProvider = document.getElementById("input-provider");
- 
+var unitSelect = document.getElementById("unit-select");
+var categorySelect = document.getElementById("category-select");
+var providerSelect = document.getElementById("provider-select");
+
 // Event listener e eventos
 
 cancelButton.addEventListener("click", (event) => {
@@ -13,14 +14,26 @@ saveButton.addEventListener("click", async (event) => {
   sendData();
 });
 
-select.addEventListener("click", async (event) => {
+unitSelect.addEventListener("click", async (event) => {
   var selectId = "unit-select";
   var apiUrl = "/unit/select";
 
   emitEvent("loadSelect", {selectId, apiUrl});
 });
 
-inputProvider.addEventListener("keyup", debounce(emitAutocompleteEvent, 300));
+categorySelect.addEventListener("click", async (event) => {
+  var selectId = "category-select";
+  var apiUrl = "/category/select";
+
+  emitEvent("loadSelect", {selectId, apiUrl});
+});
+
+providerSelect.addEventListener("click", async (event) => {
+  var selectId = "provider-select";
+  var apiUrl = "/provider/select";
+
+  emitEvent("loadSelect", {selectId, apiUrl});
+});
 
 // Functions
 
@@ -39,13 +52,12 @@ function closeModalProduct() {
 async function sendData() {
   var form = new FormData(document.querySelector(".form-group"));
   var price = form.get("preco").replace(",", ".");
-  var quantity = form.get("quantity").replace(",", ".");
   var data = {
-    name: form.get("name"),
-    quantity: quantity,
-    unit: form.get("select"),
+    categoryId: form.get("category-select"),
+    unitId: form.get("unit-select"),
+    providerId: form.get("provider-select"),
     price: price,
-    provider: form.get("provider"),
+    name: form.get("name"),
   };
 
   var response = await fetch("/product", {
@@ -92,22 +104,4 @@ function displayModal(message) {
       }, 1000);
     }, 3000);
   }
-}
-
-function debounce(func, delay) {
-  let timeoutId;
-  
-  return function() {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(this, arguments), delay);
-  };
-}
-
-function emitAutocompleteEvent() {
-  var inputValue = inputProvider.value;
-  var apiUrl = "/provider/autocomplete";
-  var selectId = "input-provider";
-  
-  if (inputValue.length === 0) return;
-  emitEvent("autocomplete", { apiUrl, inputValue, selectId });
 }

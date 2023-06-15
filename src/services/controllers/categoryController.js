@@ -20,4 +20,13 @@ router.get("/category/report", async (req, res) => {
   }
 });
 
+router.get("/category/select", async (req, res) => {
+  try {
+    const categories = await _handler.getSelectOptions();
+    return res.status(200).json(categories[0]);
+  } catch (err) {
+    return res.status(500).json({ message: "Erro ao buscar as categorias" });
+  }
+});
+
 module.exports = router;

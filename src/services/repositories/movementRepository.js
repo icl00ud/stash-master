@@ -27,10 +27,10 @@ async function getMovReport() {
     ow.name AS origin,
     dw.name AS destination
   FROM
-  tblmovement m
-  INNER JOIN tblwarehouse ow ON m.idOriginWH = ow.idWarehouse
-  INNER JOIN tblwarehouse dw ON m.idDestinationWH = dw.idWarehouse
-  LEFT JOIN tblproduct p ON m.idProduct = p.idProduct;`;
+  TBLMovement m
+  INNER JOIN TBLWarehouse ow ON m.idOriginWH = ow.idWarehouse
+  INNER JOIN TBLWarehouse dw ON m.idDestinationWH = dw.idWarehouse
+  LEFT JOIN TBLProduct p ON m.idProduct = p.idProduct;`;
 
   try {
     connection = await db.Connect();

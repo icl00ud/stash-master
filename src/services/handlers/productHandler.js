@@ -2,7 +2,16 @@ const _repository = require("../repositories/productRepository");
 
 async function getAllProducts() {
   try {
-    return await _repository.getAll();
+    const response = await _repository.getAll();
+    response[0].forEach(item => {
+      // Formatação do campo dtCreation
+      const formattedDtCreation = new Date(item.dtCreation).toLocaleString("pt-BR");
+
+      // Atualiza o campo dtCreation no próprio objeto
+      item.dtCreation = formattedDtCreation;
+    });
+
+    return response;
   } catch (err) {
     return err;
   }
@@ -10,7 +19,16 @@ async function getAllProducts() {
 
 async function getProductReport() {
   try {
-    return await _repository.getProductReport();
+    const response = await _repository.getProductReport();
+    response[0].forEach(item => {
+      // Formatação do campo dtCreation
+      const formattedDtCreation = new Date(item.dtCreation).toLocaleString("pt-BR");
+
+      // Atualiza o campo dtCreation no próprio objeto
+      item.dtCreation = formattedDtCreation;
+    });
+
+    return response;
   } catch (err) {
     return err;
   }
@@ -34,12 +52,13 @@ async function getProductById(productId) {
 
 async function insertProduct(product) {
   // Validação dos campos obrigatórios
-  if (!product || !product.name || !product.quantity || !product.unit || !product.price || !product.provider)
+  if (!product || !product.name || !product.unitId || !product.price || !product.providerId || !product.categoryId)
     throw new Error("Todos os campos devem ser preenchidos.");
 
   // Validação do nome do produto único
   const existingProduct = await _repository.getProductByName(product.name);
-  if (existingProduct)
+  console.log(existingProduct[0])
+  if (existingProduct[0].length > 0)
     throw new Error("Já existe um produto com esse nome cadastrado.");
 
   // Validação da quantidade não negativa
@@ -47,13 +66,16 @@ async function insertProduct(product) {
     throw new Error("A quantidade do produto não pode ser negativa.");
 
   const data = {
+    categoryId: product.categoryId,
+    providerId: product.providerId,
+    unitId: product.unitId,
     name: product.name,
-    quantity: product.quantity,
-    unit: product.unit,
     price: product.price,
-    provider: product.provider,
-    dtCreation: new Date().toLocaleString("pt-BR"),
+    dtCreation: new Date().toISOString().replace('T', ' ').substr(0, 19),
   };
+    
+
+
 
   try {
     await _repository.insertProduct(data);

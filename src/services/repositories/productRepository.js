@@ -19,6 +19,7 @@ async function getProductByName(productName) {
   const sqlQuery = "SELECT * FROM TBLProduct WHERE nome = ?";
 
   try {
+    connection = await db.Connect();
     return await connection.query(sqlQuery, productName);
   } catch (error) {
     return error
@@ -64,7 +65,7 @@ async function getProductById(productId) {
 async function insertProduct(data) {
   const connection = await db.Connect();
   const sqlQuery =
-    "INSERT INTO TBLProduct (nome, qtdEstoque, unidMedida, preco, fornecedor, dtCreation) VALUES (?,?,?,?,?,?)";
+    "INSERT INTO TBLProduct (idCategory, idProvider, idMedida, nome, preco, dtCreation) VALUES (?,?,?,?,?,?)";
 
   try {
     await connection.query(sqlQuery, Object.values(data));

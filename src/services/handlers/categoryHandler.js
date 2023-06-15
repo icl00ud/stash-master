@@ -16,7 +16,16 @@ async function getCategoryReport() {
   }
 }
 
+async function getSelectOptions() {
+  try {
+    return await _repository.getCategoryNames();
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getAllCategories,
-  getCategoryReport
+  getCategoryReport,
+  getSelectOptions
 };
