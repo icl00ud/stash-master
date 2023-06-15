@@ -22,26 +22,23 @@
             <label for="name">Nome do produto</label>
           </div>
           <div class="input-wrapper">
-            <input type="text" class="modal-input" name="quantity" id="quantity"  />
-            <label for="quantity">Quantidade</label>
-          </div>
-          <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
-            <select style="width: 80%;" class="modal-input" name="select" id="select">
-              <option value="">Selecione a unidade de medida</option>
-              <option value="Kg">Kilograma</option>
-              <option value="g">grama</option>
-              <option value="Un">Unidade</option>
-              <option value="L">Litro</option>
-              <option value="Caixa">Caixa</option>
-            </select>
-          </div>
-          <div class="input-wrapper">
             <input type="text" class="modal-input" name="preco" id="preco" />
             <label for="preco">Preço (R$)</label>
           </div>
-          <div class="input-wrapper">
-            <input type="text" class="modal-input" name="provider" id="provider" />
-            <label for="provider">Fornecedor</label>
+          <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+            <select style="width: 80%;" class="modal-input" name="unit-select" id="unit-select">
+              <option value="">Selecione a unidade de medida</option>
+            </select>
+          </div>
+          <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+            <select style="width: 80%;" class="modal-input" name="category-select" id="category-select" required>
+              <option value="">Selecione a categoria do produto</option>
+            </select>
+          </div>
+          <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+            <select style="width: 80%;" class="modal-input" name="provider-select" id="provider-select" required>
+              <option value="">Selecione o fornecedor do produto</option>
+            </select>
           </div>
         </form>
         <div class="modal-buttons">

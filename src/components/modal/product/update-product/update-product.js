@@ -19,14 +19,13 @@ saveButton.addEventListener("click", async (event) => {
 async function sendData() {
   var form = new FormData(document.querySelector(".form-group"));
   var price = form.get("preco").replace(",", ".");
-  var quantity = form.get("quantity").replace(",", ".");
   var data = {
     idProduct: form.get("idProduct"),
+    categoryId: form.get("category-select"),
+    providerId: form.get("provider-select"),
+    unitId: form.get("unit-select"),
     name: form.get("name"),
-    quantity: quantity,
-    unit: form.get("select"),
-    price: price,
-    provider: form.get("provider"),
+    price: price
   };
 
   if (data.idProduct == "")
@@ -63,25 +62,27 @@ async function fillProductFields() {
   if (id !== "") {
     var response = await fetch(`/product/${id}`);
     var data = await response.json();
+    console.log(data)
+    // TO DO: parei aqui
     if (response.ok) {
       var nameInput = document.getElementById("name");
-      var quantityInput = document.getElementById("quantity");
-      var selectInput = document.getElementsByName("select")[0];
       var precoInput = document.getElementById("preco");
-      var providerInput = document.getElementById("provider");
+      var unitInput = document.getElementById("unit-select");
+      var categoryInput = document.getElementById("category-select");
+      var providerInput = document.getElementById("provider-select");
       if (data.length > 0) {
         errorElement.innerHTML = "";
         nameInput.value = data[0].nome;
-        quantityInput.value = data[0].qtdEstoque;
-        selectInput.value = data[0].unidMedida;
         precoInput.value = data[0].preco;
+        unitInput.value = data[0].unidMedida;
+        categoryInput.value = data[0].category;
         providerInput.value = data[0].fornecedor;
       } else {
         errorElement.innerHTML = "O produto não existe";
         nameInput.value = null;
-        quantityInput.value = null;
-        selectInput.value = null;
         precoInput.value = null;
+        unitInputInput.value = null;
+        categoryInput.value = null;
         providerInput.value = null;
       }
     }
