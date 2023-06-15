@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "node ./src/services/server/server.js"
   },
   "keywords": [],
   "author": "",
