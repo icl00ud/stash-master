@@ -14,26 +14,10 @@ saveButton.addEventListener("click", async (event) => {
   sendData();
 });
 
-unitSelect.addEventListener("click", async (event) => {
-  var selectId = "unit-select";
-  var apiUrl = "/unit/select";
+unitSelect.addEventListener("click", handleClick);
+categorySelect.addEventListener("click", handleClick);
+providerSelect.addEventListener("click", handleClick);
 
-  emitEvent("loadSelect", {selectId, apiUrl});
-});
-
-categorySelect.addEventListener("click", async (event) => {
-  var selectId = "category-select";
-  var apiUrl = "/category/select";
-
-  emitEvent("loadSelect", {selectId, apiUrl});
-});
-
-providerSelect.addEventListener("click", async (event) => {
-  var selectId = "provider-select";
-  var apiUrl = "/provider/select";
-
-  emitEvent("loadSelect", {selectId, apiUrl});
-});
 
 // Functions
 
@@ -84,6 +68,27 @@ function emitEvent(eventName, ...detail) {
   });
 
   document.dispatchEvent(customEvent);
+}
+
+function handleClick(event) {
+  var selectId;
+  var apiUrl;
+
+  if (event.target === unitSelect) {
+    selectId = "unit-select";
+    apiUrl = "/unit/select";
+  } else if (event.target === categorySelect) {
+    selectId = "category-select";
+    apiUrl = "/category/select";
+  } else if (event.target === providerSelect) {
+    selectId = "provider-select";
+    apiUrl = "/provider/select";
+  }
+
+  emitEvent("loadSelect", { selectId, apiUrl });
+
+  // Remover o ouvinte de evento após a primeira execução
+  event.target.removeEventListener(event.type, handleClick);
 }
 
 function displayModal(message) {

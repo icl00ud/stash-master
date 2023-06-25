@@ -1,6 +1,14 @@
 document.addEventListener("loadSelect", async (event) => {
-  var selectId = event.detail[0].selectId;
-  var apiUrl = event.detail[0].apiUrl;
+  var selectId;
+  var apiUrl;
+
+  if (Array.isArray(event.detail)) {
+    selectId = event.detail[0].selectId;
+    apiUrl = event.detail[0].apiUrl;
+  } else {
+    selectId = event.detail.selectId;
+    apiUrl = event.detail.apiUrl;
+  }
 
   populateSelect(apiUrl, selectId);
 });
@@ -13,7 +21,7 @@ async function populateSelect(endpoint, elementId) {
     const response = await fetch(`${endpoint}`);
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
+
       data.forEach((item) => {
         const option = document.createElement("option");
         option.value = item.id;

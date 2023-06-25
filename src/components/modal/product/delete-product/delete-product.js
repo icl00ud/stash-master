@@ -12,11 +12,16 @@ inputField.addEventListener("change", (event) => {
 
 async function sendData() {
   var form = new FormData(document.querySelector(".form-group"));
-  var id = form.get("idProduct");
-  console.log("id: ", id);
-
-  var response = await fetch(`/product/${id}`, {
-    method: "DELETE"
+  var data = {
+    idProduct: form.get("idProduct"),
+  };
+  // TO DO parei aqui
+  var response = await fetch(`/product`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
   });
 
   if (response.ok) {

@@ -1,6 +1,9 @@
 var cancelButton = document.getElementById("cancel-update");
 var saveButton = document.getElementById("save-update");
 var errorElement = document.getElementById("message-error");
+var unitSelect = document.getElementById("unit-select");
+var categorySelect = document.getElementById("category-select");
+var providerSelect = document.getElementById("provider-select");
 
 cancelButton.addEventListener("click", (event) => {
   closeModalProduct();
@@ -14,6 +17,11 @@ idInput.addEventListener("change", async (event) => {
 saveButton.addEventListener("click", async (event) => {
   sendData();
 });
+
+unitSelect.addEventListener("click", handleClick);
+categorySelect.addEventListener("click", handleClick);
+providerSelect.addEventListener("click", handleClick);
+
 
 // Envio os dados alterados para o backend
 async function sendData() {
@@ -42,7 +50,7 @@ async function sendData() {
   if (!hasData) return displayModalMessage("Preencha pelo menos um campo");
 
   var response = await fetch("/product", {
-    method: "PATCH",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -56,6 +64,27 @@ async function sendData() {
   }
 }
 
+function handleClick(event) {
+  var selectId;
+  var apiUrl;
+
+  if (event.target === unitSelect) {
+    selectId = "unit-select";
+    apiUrl = "/unit/select";
+  } else if (event.target === categorySelect) {
+    selectId = "category-select";
+    apiUrl = "/category/select";
+  } else if (event.target === providerSelect) {
+    selectId = "provider-select";
+    apiUrl = "/provider/select";
+  }
+
+  emitEvent("loadSelect", { selectId, apiUrl });
+
+  // Remover o ouvinte de evento após a primeira execução
+  event.target.removeEventListener(event.type, handleClick);
+}
+
 // Preencho os campos de acordo com o id do produto
 async function fillProductFields() {
   var id = idInput.value.trim();
@@ -63,27 +92,19 @@ async function fillProductFields() {
     var response = await fetch(`/product/${id}`);
     var data = await response.json();
     console.log(data)
-    // TO DO: parei aqui
+
     if (response.ok) {
       var nameInput = document.getElementById("name");
       var precoInput = document.getElementById("preco");
-      var unitInput = document.getElementById("unit-select");
-      var categoryInput = document.getElementById("category-select");
-      var providerInput = document.getElementById("provider-select");
+      
       if (data.length > 0) {
         errorElement.innerHTML = "";
         nameInput.value = data[0].nome;
         precoInput.value = data[0].preco;
-        unitInput.value = data[0].unidMedida;
-        categoryInput.value = data[0].category;
-        providerInput.value = data[0].fornecedor;
       } else {
         errorElement.innerHTML = "O produto não existe";
         nameInput.value = null;
         precoInput.value = null;
-        unitInputInput.value = null;
-        categoryInput.value = null;
-        providerInput.value = null;
       }
     }
   }

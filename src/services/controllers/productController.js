@@ -38,7 +38,7 @@ router.post("/product", (req, res) => {
   }
 });
 
-router.patch("/product", async (req, res) => {
+router.put("/product", async (req, res) => {
   try {
     await _handler.updateProduct(req.body);
     return res.status(200).json({ redirect: "/stock" });
@@ -47,9 +47,9 @@ router.patch("/product", async (req, res) => {
   }
 });
 
-router.delete("/product/:id", (req, res) => {
+router.delete("/product", (req, res) => {
   try {
-    _handler.deleteProduct(req.params.id);
+    _handler.deleteProduct(req.body);
     return res.status(200).json({ redirect: "/stock", message: "Produto excluído com sucesso" });
   } catch (err) {
     return res.status(404).json({ redirect: "/stock", message: "Erro ao deletar o produto" });
