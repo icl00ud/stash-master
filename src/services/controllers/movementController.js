@@ -20,4 +20,13 @@ router.get("/movement/report", async (req, res) => {
   }
 });
 
+router.post("/movement", async (req, res) => {
+  try {
+    await _handler.createMovement(req.body);
+    return res.status(200).json({ message: "Movimentação criada com sucesso!" });
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+});
+
 module.exports = router;

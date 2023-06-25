@@ -34,6 +34,14 @@ async function getProductReport() {
   }
 }
 
+async function getProductOptions() {
+  try {
+    return await _repository.getProductOptions();
+  } catch (err) {
+    return err;
+  }
+}
+
 async function getProductById(productId) {
   try {
     const result = await _repository.getProductById(productId);
@@ -121,4 +129,5 @@ module.exports = {
   getProductById,
   deleteProduct,
   getProductReport,
+  getProductOptions,
 };

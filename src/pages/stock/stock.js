@@ -1,3 +1,9 @@
+// Movement
+
+var createMovementModal = document.getElementById("createMovementModal");
+var createMovementButton = document.getElementById("create-movement");
+
+// Product
 var createProductModal = document.getElementById("createProductModal");
 var updateProductModal = document.getElementById("updateProductModal");
 var deleteProductModal = document.getElementById("deleteProductModal");
@@ -16,10 +22,35 @@ var movementContent = document.getElementById("movement-content");
 var categoryContent = document.getElementById("category-content");
 var title = document.getElementById("title");
 
-const stockColumns = ["stockId", "productName", "productPrice", "unit", "stockedQuantity", "warehouseName", "warehouseAddress"];
-const productColumns = ["idProduct","nome","unidMedida","preco","dtCreation"];
-const movementColumns = ["idMovement","nome","quantityMoved","type","date","description","origin","destination"];
+const stockColumns = [
+  "stockId",
+  "productName",
+  "productPrice",
+  "unit",
+  "stockedQuantity",
+  "warehouseName",
+  "warehouseAddress",
+];
+const productColumns = [
+  "idProduct",
+  "nome",
+  "unidMedida",
+  "preco",
+  "dtCreation",
+];
+const movementColumns = [
+  "idMovement",
+  "nome",
+  "quantityMoved",
+  "type",
+  "date",
+  "description",
+  "origin",
+  "destination",
+];
 const categoryColumns = ["idCategory", "category", "description", "dtCreation"];
+
+// Event Listeners
 
 productTab.addEventListener("click", () => {
   productTab.classList.add("active");
@@ -77,6 +108,10 @@ categoryTab.addEventListener("click", () => {
   stockContent.style.display = "none";
 });
 
+createMovementButton.addEventListener("click", (event) => {
+  loadModal("create-movement");
+});
+
 createProductButton.addEventListener("click", (event) => {
   loadModal("create-product");
 });
@@ -124,7 +159,10 @@ panelHeaderButton.addEventListener("click", (event) => {
 // Functions
 
 function loadModal(button) {
-  var url, modal, scriptSrc, commonScriptSrc = "commonFunctions.js";
+  var url,
+    modal,
+    scriptSrc,
+    commonScriptSrc = "commonFunctions.js";
 
   switch (button) {
     case "create-product":
@@ -142,6 +180,11 @@ function loadModal(button) {
       modal = deleteProductModal;
       scriptSrc = "delete-product.js";
       break;
+    case "create-movement":
+      url = "/stockPage/create_movement";
+      modal = createMovementModal;
+      scriptSrc = "create-movement.js";
+      break;
   }
 
   var sources = [scriptSrc, commonScriptSrc];
@@ -154,7 +197,7 @@ function loadModal(button) {
       sources.forEach((source) => {
         var script = document.createElement("script");
         script.src = source;
-        script.type = 'module';
+        script.type = "module";
         document.body.appendChild(script);
       });
     }
@@ -168,7 +211,7 @@ async function populateGrid(endpoint, columns, gridName) {
 
   const response = await fetch(`${endpoint}`);
   const data = await response.json();
-  
+
   for (const item of data) {
     const row = grid.insertRow();
 

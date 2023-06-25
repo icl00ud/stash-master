@@ -16,7 +16,18 @@ async function getMovReport() {
   }
 }
 
+async function createMovement(mov) {
+  try {
+    mov.date = new Date().toISOString().replace('T', ' ').substr(0, 19);
+    
+    return await _repository.createMovement(mov);
+  } catch (error) {
+    return error;
+  }
+}
+
 module.exports = {
   getAllMovements,
-  getMovReport
+  getMovReport,
+  createMovement
 };

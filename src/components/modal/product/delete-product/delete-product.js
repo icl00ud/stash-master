@@ -15,13 +15,13 @@ async function sendData() {
   var data = {
     idProduct: form.get("idProduct"),
   };
-  // TO DO parei aqui
-  var response = await fetch(`/product`, {
+
+  var response = await fetch(`/product/${data.idProduct}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   if (response.ok) {
@@ -51,7 +51,7 @@ async function fillInputField() {
 }
 
 function closeModalProduct() {
-  var modal = document.getElementById("updateProductModal");
+  var modal = document.getElementById("deleteProductModal");
   modal.innerHTML = "";
 
   var scripts = document.getElementsByTagName("script");

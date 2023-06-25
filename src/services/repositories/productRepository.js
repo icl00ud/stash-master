@@ -49,6 +49,19 @@ async function getProductReport() {
   }
 }
 
+async function getProductOptions() {
+  const connection = await db.Connect();
+  const sqlQuery = "SELECT idProduct AS 'id', nome AS 'text' FROM TBLProduct";
+
+  try {
+    return await connection.query(sqlQuery);
+  } catch (err) {
+    return err;
+  } finally {
+    if (connection) connection.end();
+  }
+}
+
 async function getProductById(productId) {
   const connection = await db.Connect();
   const sqlQuery = "SELECT * FROM TBLProduct WHERE idProduct = ?";
@@ -58,7 +71,7 @@ async function getProductById(productId) {
   } catch (err) {
     return err;
   } finally {
-    if (connection !== null) connection.end();
+    if (connection) connection.end();
   }
 }
 
@@ -87,8 +100,7 @@ async function updateProduct(product) {
     nome = '${product.name}',
     preco = '${product.price}'
     WHERE idProduct = ${product.idProduct}`;
-
-    console.log(sqlQuery)
+    
   try {
     connection = await db.Connect();
 
@@ -120,6 +132,7 @@ async function deleteProduct(id) {
 module.exports = {
   getAll,
   getProductReport,
+  getProductOptions,
   getProductById,
   insertProduct,
   updateProduct,

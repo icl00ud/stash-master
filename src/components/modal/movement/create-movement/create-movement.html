@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criar movimentação</title>
+    <link rel="stylesheet" href="create-product.css" />
+</head>
+
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">Criar Movimentação</div>
+            <form class="form-group">
+                <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+                    <select style="width: 80%;" class="modal-input" name="product-select" id="product-select" required>
+                        <option value="">Selecione o Produto</option>
+                    </select>
+                </div>
+                <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+                    <select style="width: 80%;" class="modal-input" name="origin-warehouse-select" id="origin-warehouse-select" required>
+                        <option value="">Origem do Produto</option>
+                    </select>
+                </div>
+                <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+                    <select style="width: 80%;" class="modal-input" name="dest-warehouse-select" id="dest-warehouse-select" required>
+                        <option value="">Destino do Produto</option>
+                    </select>
+                </div>
+                <div style="margin-top: -7%; text-align: center;" class="input-wrapper">
+                    <select style="width: 80%;" class="modal-input" name="movtype-select" id="movtype-select" required>
+                        <option value="">Tipo de Movimentação</option>
+                        <option value="Entrada">Entrada</option>
+                        <option value="Saida">Saída</option>
+                    </select>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" class="modal-input" name="quantity" id="quantity" required/>
+                    <label for="preco">Quantidade Movimentada</label>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" class="modal-input" name="description" id="description" required/>
+                    <label for="description">Descrição</label>
+                </div>
+            </form>
+            <div class="modal-buttons">
+                <button id="cancel">Cancelar</button>
+                <button id="save">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./create-movement.js"></script>
+</body>
+
+</html>

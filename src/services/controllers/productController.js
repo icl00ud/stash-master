@@ -20,6 +20,15 @@ router.get("/product/report", async (req, res) => {
   }
 });
 
+router.get("/product/select", async (req, res) => {
+  try {
+    const items = await _handler.getProductOptions();
+    return res.status(200).json(items[0]);
+  } catch (err) {
+    return res.status(500).json({ message: "Erro ao buscar os produtos" });
+  }
+});
+
 router.get("/product/:id", async (req, res) => {
   try {
     const product = await _handler.getProductById(req.params.id);
@@ -32,7 +41,7 @@ router.get("/product/:id", async (req, res) => {
 router.post("/product", (req, res) => {
   try {
     _handler.insertProduct(req.body);
-    return res.status(201).json({ redirect: "/stock", message: "Produto criado com sucesso!" });
+    return res.status(201).json({ redirect: "/stockPage", message: "Produto criado com sucesso!" });
   } catch (err) {
     return res.status(500).json({ message: "Erro ao criar o produto" });
   }
@@ -41,18 +50,19 @@ router.post("/product", (req, res) => {
 router.put("/product", async (req, res) => {
   try {
     await _handler.updateProduct(req.body);
-    return res.status(200).json({ redirect: "/stock" });
+    return res.status(200).json({ redirect: "/stockPage" });
   } catch (err) {
-    return res.status(500).json({ redirect: "/stock", message: "Erro ao alterar o produto" });
+    return res.status(500).json({ redirect: "/stockPage", message: "Erro ao alterar o produto" });
   }
 });
 
-router.delete("/product", (req, res) => {
+router.delete("/product/:id", async (req, res) => {
   try {
-    _handler.deleteProduct(req.body);
-    return res.status(200).json({ redirect: "/stock", message: "Produto excluído com sucesso" });
+    console.log("CAI AQUI PORRA")
+    await _handler.deleteProduct(req.params.id);
+    return res.status(200).json({ redirect: "/stockPage", message: "Produto excluído com sucesso" });
   } catch (err) {
-    return res.status(404).json({ redirect: "/stock", message: "Erro ao deletar o produto" });
+    return res.status(404).json({ redirect: "/stockPage", message: "Erro ao deletar o produto" });
   }
 });
 

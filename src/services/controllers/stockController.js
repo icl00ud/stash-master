@@ -4,6 +4,7 @@ const path = require("path");
 const _handler = require("../handlers/stockHandler");
 
 router.use(express.static(path.join(__dirname, "../../images")));
+router.use(express.static(path.join(__dirname, "../../components/modal/movement/create-movement")));
 router.use(express.static(path.join(__dirname, "../../components/modal/product/create-product")));
 router.use(express.static(path.join(__dirname, "../../components/modal/product/delete-product")));
 router.use(express.static(path.join(__dirname, "../../components/modal/product/update-product")));

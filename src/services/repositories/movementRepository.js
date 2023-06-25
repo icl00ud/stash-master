@@ -43,7 +43,21 @@ async function getMovReport() {
   }
 }
 
+async function createMovement(mov) {
+  const connection = await db.Connect();
+  const sqlQuery = "INSERT INTO TBLMovement (idProduct, idOriginWH, idDestinationWH, type, date, quantityMoved, description) VALUES (?,?,?,?,?,?,?)";
+
+  try {
+    await connection.query(sqlQuery, Object.values(mov));
+  } catch (err) {
+    return err
+  } finally {
+    connection.end();
+  }
+}
+
 module.exports = {
   getAll,
-  getMovReport
+  getMovReport,
+  createMovement
 };
