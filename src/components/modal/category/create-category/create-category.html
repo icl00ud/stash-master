@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criar categoria</title>
+    <link rel="stylesheet" href="create-product.css" />
+</head>
+
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">Criar Movimentação</div>
+            <form class="form-group">
+                <div class="input-wrapper">
+                    <input type="text" class="modal-input" name="nome" id="nome" required/>
+                    <label for="nome">Nome da Categoria</label>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" class="modal-input" name="description" id="description" required/>
+                    <label for="description">Descrição</label>
+                </div>
+            </form>
+            <div class="modal-buttons">
+                <button id="cancel">Cancelar</button>
+                <button id="save">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./create-category.js"></script>
+</body>
+
+</html>

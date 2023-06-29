@@ -1,5 +1,8 @@
-// Movement
+// Category
+var createCategoryModal = document.getElementById("createCategoryModal");
+var createCategoryButton = document.getElementById("create-category");
 
+// Movement
 var createMovementModal = document.getElementById("createMovementModal");
 var createMovementButton = document.getElementById("create-movement");
 
@@ -10,6 +13,7 @@ var deleteProductModal = document.getElementById("deleteProductModal");
 var updateProductButton = document.getElementById("update-product");
 var createProductButton = document.getElementById("create-product");
 var deleteProductButton = document.getElementById("delete-product");
+
 var stockHeaderButton = document.getElementById("stock");
 var panelHeaderButton = document.getElementById("panel");
 var productTab = document.getElementById("product-tab");
@@ -108,6 +112,10 @@ categoryTab.addEventListener("click", () => {
   stockContent.style.display = "none";
 });
 
+createCategoryButton.addEventListener("click", (event) => {
+  loadModal("create-category");
+});
+
 createMovementButton.addEventListener("click", (event) => {
   loadModal("create-movement");
 });
@@ -184,6 +192,11 @@ function loadModal(button) {
       url = "/stockPage/create_movement";
       modal = createMovementModal;
       scriptSrc = "create-movement.js";
+      break;
+    case "create-category":
+      url = "/stockPage/create_category";
+      modal = createCategoryModal;
+      scriptSrc = "create-category.js";
       break;
   }
 

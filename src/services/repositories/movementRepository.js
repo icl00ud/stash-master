@@ -27,15 +27,17 @@ async function getMovReport() {
     ow.name AS origin,
     dw.name AS destination
   FROM
-  TBLMovement m
-  INNER JOIN TBLWarehouse ow ON m.idOriginWH = ow.idWarehouse
-  INNER JOIN TBLWarehouse dw ON m.idDestinationWH = dw.idWarehouse
-  LEFT JOIN TBLProduct p ON m.idProduct = p.idProduct;`;
+    TBLMovement m
+    INNER JOIN TBLWarehouse ow ON m.idOriginWH = ow.idWarehouse
+    INNER JOIN TBLWarehouse dw ON m.idDestinationWH = dw.idWarehouse
+    LEFT JOIN TBLProduct p ON m.idProduct = p.idProduct
+  ORDER BY
+    m.date DESC`;
 
   try {
     connection = await db.Connect();
-
-    return await connection.query(sqlQuery);
+    const results = await connection.query(sqlQuery);
+    return results;
   } catch (error) {
     throw error;
   } finally {

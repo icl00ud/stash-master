@@ -29,7 +29,23 @@ async function getCategoryNames() {
     }
 }
 
+async function createCategory(category) {
+    let connection;
+    const sqlQuery = "INSERT INTO TBLCategory (category, description, dtCreation) VALUES (?,?,?)";
+
+    try {
+        connection = await db.Connect();
+        return await connection.query(sqlQuery, Object.values(category));
+    } catch (error) {
+        return error
+    } finally {
+        if(connection) 
+            connection.end();
+    }
+}
+
 module.exports = {
     getAll,
-    getCategoryNames
+    getCategoryNames,
+    createCategory
 }

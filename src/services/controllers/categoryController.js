@@ -29,4 +29,13 @@ router.get("/category/select", async (req, res) => {
   }
 });
 
+router.post("/category", async (req, res) => {
+  try {
+    const categories = await _handler.createCategory(req.body);
+    return res.status(200).json({ message: "Categoria criada com sucesso!" });
+  } catch (err) {
+    return res.status(500).json({ message: "Erro ao buscar as categorias" });
+  }
+});
+
 module.exports = router;
