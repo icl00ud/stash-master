@@ -58,7 +58,6 @@ router.put("/product", async (req, res) => {
 
 router.delete("/product/:id", async (req, res) => {
   try {
-    console.log("CAI AQUI PORRA")
     await _handler.deleteProduct(req.params.id);
     return res.status(200).json({ redirect: "/stockPage", message: "Produto excluído com sucesso" });
   } catch (err) {
